@@ -1,0 +1,47 @@
+{
+  "NMC811": {
+    "carbon_kwh_range": [58, 75],
+    "carbon_class_expected": "B",
+    "rtw_efficiency_range": [91, 95],
+    "internal_resistance_pack_mohm_range": [25, 55],
+    "self_discharge_pct_per_month_range": [1.5, 3.0],
+    "typical_cycle_life": 1000,
+    "thermal_runaway_risk": "HIGH",
+    "operating_temp_min_c": -20,
+    "operating_temp_max_c": 55,
+    "energy_density_wh_per_kg": 220,
+    "cobalt_pct_cathode": 10,
+    "nickel_pct_cathode": 80,
+    "safety_rating": "MEDIUM"
+  },
+  "NMC712": {
+    "carbon_kwh_range": [52, 72],
+    "carbon_class_expected": "B",
+    "rtw_efficiency_range": [91, 95],
+    "internal_resistance_pack_mohm_range": [28, 58],
+    "self_discharge_pct_per_month_range": [1.5, 3.0],
+    "typical_cycle_life": 1200,
+    "thermal_runaway_risk": "MEDIUM_HIGH",
+    "operating_temp_min_c": -20,
+    "operating_temp_max_c": 55,
+    "energy_density_wh_per_kg": 210,
+    "cobalt_pct_cathode": 20,
+    "nickel_pct_cathode": 70,
+    "safety_rating": "MEDIUM"
+  },
+  "LFP": {
+    "carbon_kwh_range": [35, 55],
+    "carbon_class_expected": "A",
+    "rtw_efficiency_range": [93, 97],
+    "internal_resistance_pack_mohm_range": [15, 40],
+    "self_discharge_pct_per_month_range": [1.0, 2.0],
+    "typical_cycle_life": 3000,
+    "thermal_runaway_risk": "LOW",
+    "operating_temp_min_c": -20,
+    "operating_temp_max_c": 60,
+    "energy_density_wh_per_kg": 160,
+    "cobalt_pct_cathode": 0,
+    "nickel_pct_cathode": 0,
+    "safety_rating": "HIGH"
+  }
+}

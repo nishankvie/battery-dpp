@@ -1,0 +1,1045 @@
+{
+  "meta": {
+    "manufacturer_id": "volvo",
+    "manufacturer_name": "Volvo Cars",
+    "manufacturer_country": "Sweden",
+    "model_id": "ex90_nmc811_111kwh",
+    "model_name": "EX90 Twin Motor MY24",
+    "chemistry": "NMC811",
+    "capacity_kwh": 111,
+    "verification_status": "VERIFIED",
+    "overall_score": 50,
+    "trust_score": 71.5,
+    "data_real_pct": 43,
+    "data_mock_pct": 57,
+    "anomaly_flags": []
+  },
+
+  "group_a_general": {
+    "label": "General Battery Information",
+    "regulation": "Annex VI Part A",
+    "data_points": {
+      "dp1_manufacturer": {
+        "id": 1, "label": "Manufacturer Identification",
+        "value": "Volvo Cars AB, SE-405 31 Gothenburg, Sweden. Tel: +46 31 59 00 00 | volvocars.com",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-1; Art. 38(7)"
+      },
+      "dp2_battery_model": {
+        "id": 2, "label": "Battery Category & Model",
+        "value": "EV Battery | EX90 NMC811 111 kWh Traction Battery | Cell Manufacturer: CATL",
+        "chemistry": "NMC811", "category": "Electric Vehicle Battery",
+        "cell_manufacturer": "CATL",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-2; Art. 38(6)"
+      },
+      "dp3_place_of_manufacture": {
+        "id": 3, "label": "Place of Manufacture",
+        "cells_location": "Ningde, Fujian, China (CATL)",
+        "assembly_location": "Charleston, South Carolina, USA",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-3"
+      },
+      "dp4_date_of_manufacture": {
+        "id": 4, "label": "Date of Manufacture",
+        "value": "2024 (Model Year MY24)",
+        "year": 2024,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-4"
+      },
+      "dp5_battery_weight": {
+        "id": 5, "label": "Battery Weight",
+        "modules_kg": 474, "complete_system_kg": 637,
+        "unit": "kg",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-5"
+      },
+      "dp6_rated_capacity": {
+        "id": 6, "label": "Rated Capacity",
+        "gross_kwh": 111, "net_kwh": 107,
+        "unit": "kWh",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-6"
+      },
+      "dp7_chemical_composition": {
+        "id": 7, "label": "Chemical Composition",
+        "cathode": "NMC811 (Ni80:Mn10:Co10)",
+        "anode": "Graphite (natural/synthetic)",
+        "electrolyte": "Liquid LiPF6 solution",
+        "cell_format": "Prismatic (CATL)",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-7"
+      },
+      "dp8_hazardous_substances": {
+        "id": 8, "label": "Hazardous Substances",
+        "substances": [
+          {"name": "LiPF6", "mass_kg": 2.8, "hazard": "corrosive, toxic"},
+          {"name": "Ethylene carbonate", "mass_kg": 4.1, "hazard": "irritant"},
+          {"name": "Dimethyl carbonate", "mass_kg": 3.0, "hazard": "flammable"},
+          {"name": "Ethylmethyl carbonate", "mass_kg": 4.3, "hazard": "flammable"},
+          {"name": "Cobalt", "mass_kg": 9.6, "hazard": "carcinogenic Cat 1B, aquatic toxicity"},
+          {"name": "Nickel", "mass_kg": 50.2, "hazard": "sensitising, carcinogenic Cat 1A"},
+          {"name": "Manganese", "mass_kg": 9.8, "hazard": "neurological risk"},
+          {"name": "Lithium", "mass_kg": 7.4, "hazard": "reactive with water, fire hazard"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-8"
+      },
+      "dp9_fire_extinguishing": {
+        "id": 9, "label": "Fire Extinguishing Agent",
+        "primary": "Water (large volume, >= 300 l/min)",
+        "alternative": "Special Li-ion extinguisher (F-500 EA)",
+        "not_suitable": ["CO2", "dry powder"],
+        "min_safe_distance_m": 15,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-9"
+      },
+      "dp10_critical_raw_materials": {
+        "id": 10, "label": "Critical Raw Materials",
+        "crm_list": ["Cobalt", "Lithium", "Natural Graphite", "Manganese", "Nickel"],
+        "svhc": ["Cobalt compounds (Co3O4)"],
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-10"
+      }
+    }
+  },
+
+  "group_b_carbon": {
+    "label": "Carbon Footprint",
+    "regulation": "Art. 7 Para. 1 & 2; Ann. II",
+    "data_points": {
+      "dp11_carbon_total": {
+        "id": 11, "label": "Carbon Footprint — Total Value",
+        "value_kg_co2_per_kwh": 65.8,
+        "total_kg_co2": 7300,
+        "basis_kwh": 111,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(d)"
+      },
+      "dp12_carbon_class": {
+        "id": 12, "label": "Carbon Performance Class",
+        "declared_class": "B",
+        "class_boundaries": {"A": [0,40], "B": [40,80], "C": [80,120], "D": [120,999]},
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(2); Annex II-8"
+      },
+      "dp13_carbon_admin": {
+        "id": 13, "label": "Carbon Declaration — Manufacturer Details",
+        "value": "Volvo Cars AB, SE-405 31 Gothenburg. sustainability@volvocars.com",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(a)"
+      },
+      "dp14_carbon_model": {
+        "id": 14, "label": "Carbon Declaration — Battery Model",
+        "model": "NMC811 111 kWh Li-ion Traction Battery",
+        "nominal_capacity_ah": 272,
+        "nominal_voltage_v": 408,
+        "application": "Volvo EX90 Twin Motor MY24",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(b)"
+      },
+      "dp15_carbon_location": {
+        "id": 15, "label": "Carbon Declaration — Manufacturing Location",
+        "value": "Charleston, South Carolina, USA",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(c)"
+      },
+      "dp16_carbon_lifecycle": {
+        "id": 16, "label": "Carbon — Lifecycle Breakdown",
+        "phases": {
+          "raw_materials": {"kg_co2": 3500, "pct": 48},
+          "manufacturing": {"kg_co2": 2200, "pct": 30},
+          "distribution": {"kg_co2": 150, "pct": 2},
+          "end_of_life": {"kg_co2": -550, "pct": -8}
+        },
+        "total_kg_co2": 7300,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(e); Annex II-4"
+      },
+      "dp17_carbon_doc_ref": {
+        "id": 17, "label": "Carbon Declaration — DoC Reference",
+        "reference": "VC-BAT-2024-EU-00847",
+        "notified_body": "TÜV Rheinland AG (Ref. 0035)",
+        "date": "2024-03-15",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(f)"
+      },
+      "dp18_carbon_web_link": {
+        "id": 18, "label": "Carbon Declaration — Web Link",
+        "url": "https://www.volvocars.com/intl/v/cars/ex90/sustainability",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(g)"
+      }
+    }
+  },
+
+  "group_c_recycled": {
+    "label": "Recycled Content",
+    "regulation": "Art. 8 Para. 1; Ann. XIII No. 1e",
+    "data_points": {
+      "dp19_recycled_cobalt": {
+        "id": 19, "label": "Recycled Content — Cobalt",
+        "current_pct": 0, "target_2031_pct": 16, "target_2036_pct": 26,
+        "source": "Kamoto Copper Company (KCC), Kolwezi, DRC (Glencore)",
+        "is_primary": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp20_recycled_lithium": {
+        "id": 20, "label": "Recycled Content — Lithium",
+        "current_pct": 0, "target_2031_pct": 6, "target_2036_pct": 12,
+        "source": "SQM (Sociedad Química y Minera de Chile), Atacama Desert",
+        "is_primary": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp21_recycled_nickel": {
+        "id": 21, "label": "Recycled Content — Nickel",
+        "current_pct": 0, "target_2031_pct": 6, "target_2036_pct": 15,
+        "source": "Indonesia (HPAL process)",
+        "is_primary": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp22_recycled_lead": {
+        "id": 22, "label": "Recycled Content — Lead",
+        "current_pct": 0, "threshold_pct": 0.004,
+        "labelling_required": false,
+        "note": "NMC battery contains no lead in active materials",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp23_renewable_energy": {
+        "id": 23, "label": "Share from Renewable Sources",
+        "cell_manufacturing_pct": 85,
+        "pack_assembly_pct": 70,
+        "cell_source": "Hydropower + I-RECs (CATL Ningde)",
+        "assembly_source": "Volvo Cars Charleston target 100% by 2025",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(f)"
+      }
+    }
+  },
+
+  "group_d_sourcing": {
+    "label": "Responsible Sourcing",
+    "regulation": "Art. 48-52; Ann. X; Ann. XIII No. 1d",
+    "data_points": {
+      "dp24_due_diligence_strategy": {
+        "id": 24, "label": "Due Diligence Strategy",
+        "frameworks": ["OECD Due Diligence Guidance 2018", "Volvo Cars Supplier Code of Conduct"],
+        "traceability": "Blockchain via Circulor (cobalt, lithium, nickel)",
+        "certifications": ["RMI (CATL)", "LBMA (Umicore for cobalt)"],
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 48; Art. 49(1)"
+      },
+      "dp25_due_diligence_report": {
+        "id": 25, "label": "Due Diligence Report",
+        "report": "Volvo Cars Annual Report 2024",
+        "verification": "Independent — Circulor + GBA Framework",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 52(3)"
+      },
+      "dp26_independent_verification": {
+        "id": 26, "label": "Independent Verification Summary",
+        "verifier": "Circulor (London, UK)",
+        "scope": {
+          "cobalt": "Full traceability DRC to Ningde — OECD conformity confirmed",
+          "lithium": "Traceability SQM Chile to Umicore Belgium confirmed",
+          "nickel": "Origin Indonesia confirmed (HPAL process)"
+        },
+        "method": "Distributed ledger (blockchain)",
+        "result": "Full compliance with OECD Due Diligence confirmed",
+        "date": "2024-06",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 51; Art. 52(3)"
+      },
+      "dp27_raw_material_description": {
+        "id": 27, "label": "Raw Material Description",
+        "materials": [
+          {"name": "Cobalt", "trade_name": "Cobalt Hydroxide Co(OH)2", "purity": ">=99.8%"},
+          {"name": "Nickel", "trade_name": "Nickel Sulphate NiSO4·6H2O", "purity": ">=22% Ni"},
+          {"name": "Lithium", "trade_name": "Lithium Carbonate Li2CO3 / LiOH", "purity": ">=99.5%"},
+          {"name": "Graphite", "trade_name": "Spherical Natural Graphite", "purity": ">99.95% C"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(a)"
+      },
+      "dp28_supplier_names": {
+        "id": 28, "label": "Supplier Names & Addresses",
+        "suppliers": [
+          {"role": "Cell Production", "name": "CATL", "location": "Ningde, Fujian 352100, China"},
+          {"role": "Cathode Active Material", "name": "Umicore NV/SA", "location": "Cheonan, South Korea"},
+          {"role": "Anode Active Material", "name": "BTR New Material Group", "location": "Shenzhen, China"},
+          {"role": "Electrolyte", "name": "Soulbrain Holdings", "location": "Seongnam, South Korea"},
+          {"role": "Pack Assembly", "name": "Volvo Cars SC Manufacturing LLC", "location": "Charleston, SC, USA"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(b)"
+      },
+      "dp29_country_of_origin": {
+        "id": 29, "label": "Country of Origin & Market Transactions",
+        "origins": {
+          "cobalt": {"country": "DRC", "geopolitical_risk": 8},
+          "nickel": {"country": "Indonesia/Philippines", "geopolitical_risk": 5},
+          "lithium": {"country": "Chile/Australia", "geopolitical_risk": 4},
+          "graphite": {"country": "China", "geopolitical_risk": 6}
+        },
+        "tracked_via": "Circulor Blockchain",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 49(2)(c)"
+      },
+      "dp30_raw_material_quantities": {
+        "id": 30, "label": "Raw Material Quantities",
+        "materials": [
+          {"name": "Cobalt", "mass_kg": 9.6, "pct_active": 2.0},
+          {"name": "Nickel", "mass_kg": 50.2, "pct_active": 10.6},
+          {"name": "Manganese", "mass_kg": 9.8, "pct_active": 2.1},
+          {"name": "Lithium", "mass_kg": 7.4, "pct_active": 1.6},
+          {"name": "Graphite", "mass_kg": 118.5, "pct_active": 25.0},
+          {"name": "Aluminium", "mass_kg": 28.4, "pct_active": null},
+          {"name": "Copper", "mass_kg": 26.1, "pct_active": null},
+          {"name": "Steel", "mass_kg": 85.0, "pct_active": null},
+          {"name": "Electrolyte", "mass_kg": 14.2, "pct_active": null},
+          {"name": "Other (BMS/cooling/wiring)", "mass_kg": 124.8, "pct_active": null}
+        ],
+        "total_module_mass_kg": 474,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(d)"
+      },
+      "dp31_audit_report": {
+        "id": 31, "label": "Independent Supplier Audit Report",
+        "auditor": "Circulor Ltd., London, UK",
+        "method": "Blockchain-based traceability",
+        "result": "All critical raw materials fully traceable. OECD conformity confirmed.",
+        "date": "2024-06",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(e)"
+      },
+      "dp32_conflict_areas": {
+        "id": 32, "label": "Conflict/High-Risk Areas Info",
+        "cobalt": {
+          "mine": "Kamoto Copper Company (KCC), Kolwezi, DRC",
+          "operator": "Glencore plc",
+          "asm_involvement": false,
+          "child_labour_confirmed": false,
+          "oecd_conformity": true
+        },
+        "lithium": {
+          "region": "Atacama Desert, Chile",
+          "risk_classification": "Not conflict/high-risk",
+          "water_stress": true
+        },
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(f)"
+      },
+      "dp33_recycled_source_evidence": {
+        "id": 33, "label": "Evidence of Recycled Source",
+        "note": "EX90 MY24 uses exclusively primary raw materials. 0% recycled for all CRM.",
+        "recycling_partners": ["Umicore (Europe)", "Retriev Technologies (North America)"],
+        "future_targets_acknowledged": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 52(4)"
+      }
+    }
+  },
+
+  "group_e_electrical": {
+    "label": "Electrical Characteristics",
+    "regulation": "Ann. XIII No. 1 g-p",
+    "data_points": {
+      "dp34_rated_capacity_ah": {
+        "id": 34, "label": "Rated Capacity (Ah)",
+        "value_ah": 272, "usable_kwh": 107,
+        "measurement": "IEC 62660-1 (0.33C at 25°C)",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(g)"
+      },
+      "dp35_min_voltage": {
+        "id": 35, "label": "Minimum Voltage",
+        "value_v": 280, "condition": "discharge cut-off",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(h)"
+      },
+      "dp36_nominal_voltage": {
+        "id": 36, "label": "Nominal Voltage",
+        "value_v": 408, "architecture": "400V",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(h)"
+      },
+      "dp37_max_voltage": {
+        "id": 37, "label": "Maximum Voltage",
+        "value_v": 425, "condition": "fully charged",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(h)"
+      },
+      "dp38_power_capability": {
+        "id": 38, "label": "Original Power Capability",
+        "peak_discharge_kw": 300,
+        "dc_charging_kw": 250,
+        "ac_charging_kw_1phase": 11,
+        "ac_charging_kw_3phase": 22,
+        "recuperation_kw": 100,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(i)"
+      },
+      "dp39_power_limits": {
+        "id": 39, "label": "Power Limits",
+        "max_discharge_kw": 300, "continuous_kw": 185,
+        "max_dc_charging_kw": 250, "max_ac_charging_kw": 22,
+        "recuperation_kw": 100,
+        "optimal_temp_range_c": [20, 40],
+        "power_reduction_below_c": 0,
+        "power_reduction_above_c": 45,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(i)"
+      },
+      "dp40_expected_lifetime": {
+        "id": 40, "label": "Expected Lifetime (Cycles)",
+        "cycles_to_70pct_soh": 1000,
+        "warranty_years": 8, "warranty_km": 160000,
+        "reference_test": "WLTC cycle",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(j)"
+      },
+      "dp41_capacity_threshold": {
+        "id": 41, "label": "Capacity Threshold for Exhaustion",
+        "soh_threshold_pct": 70,
+        "threshold_kwh": 77.7,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(k)"
+      },
+      "dp42_storage_temperature": {
+        "id": 42, "label": "Temperature Range for Storage",
+        "min_c": -40, "max_c": 60,
+        "reference": "IEC 62619",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(l)"
+      },
+      "dp43_warranty_calendar": {
+        "id": 43, "label": "Manufacturer Warranty — Calendar Life",
+        "years": 8, "km": 160000, "soh_threshold_pct": 70,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(m)"
+      },
+      "dp44_rtw_initial": {
+        "id": 44, "label": "Round-Trip Efficiency — Initial",
+        "value_pct": 93.2,
+        "typical_range": [92, 94],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(n)"
+      },
+      "dp45_rtw_50pct": {
+        "id": 45, "label": "Round-Trip Efficiency — After 50% Cycles",
+        "value_pct": 89.5,
+        "typical_range": [88, 91],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(n)"
+      },
+      "dp46_internal_resistance_cell": {
+        "id": 46, "label": "Internal Resistance — Cell",
+        "value_mohm": 0.92,
+        "typical_range": [0.8, 1.5],
+        "condition": "25°C, 50% SoC",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(o)"
+      },
+      "dp47_internal_resistance_pack": {
+        "id": 47, "label": "Internal Resistance — Pack",
+        "value_mohm": 34.8,
+        "typical_range": [30, 60],
+        "condition": "400V NMC811 system",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(o)"
+      },
+      "dp48_c_rate": {
+        "id": 48, "label": "C-Rate of Cycle Life Test",
+        "charge_c": 0.33, "discharge_c": 0.33,
+        "reference": "IEC 62660 / WLTP standard",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(p)"
+      }
+    }
+  },
+
+  "group_f_conformity": {
+    "label": "Conformity, Labelling & Waste",
+    "regulation": "Art. 13-20; Art. 74",
+    "data_points": {
+      "dp49_eu_doc": {
+        "id": 49, "label": "EU Declaration of Conformity",
+        "issued_by": "Volvo Cars AB",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 18; Annex IX"
+      },
+      "dp50_doc_reference": {
+        "id": 50, "label": "DoC Reference Number",
+        "reference": "VC-BAT-2024-EU-00847",
+        "notified_body": "TÜV Rheinland AG, Cologne",
+        "notified_body_ref": "0035",
+        "test_report_ref": "TR-BAT-2024-00847-DE",
+        "date": "2024-03-15",
+        "regulations": ["Reg. (EU) 2023/1542", "Directive 2014/30/EU", "Reg. (EU) 2018/858"],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(f); Annex IX"
+      },
+      "dp51_ce_marking": {
+        "id": 51, "label": "CE Marking",
+        "affixed": true,
+        "location": "Battery housing (underside)",
+        "notified_body_ref": "0035",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 19; Art. 20"
+      },
+      "dp52_labelling": {
+        "id": 52, "label": "Labelling Requirements",
+        "separate_collection_symbol": true,
+        "capacity_label": "111 kWh",
+        "qr_code": true,
+        "hg_labelling_required": false,
+        "cd_labelling_required": false,
+        "pb_labelling_required": false,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 13(3) & (4)"
+      },
+      "dp53_cadmium_marking": {
+        "id": 53, "label": "Cadmium Marking",
+        "cd_pct": 0.0, "threshold_pct": 0.002,
+        "labelling_required": false,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 13(5)"
+      },
+      "dp54_lead_marking": {
+        "id": 54, "label": "Lead Marking",
+        "pb_pct": 0.0, "threshold_pct": 0.004,
+        "labelling_required": false,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 13(5)"
+      },
+      "dp55_waste_usage": {
+        "id": 55, "label": "End-User Usage Recommendations",
+        "daily_charge_range": "20-80% SoC",
+        "max_dc_fast_per_day": 2,
+        "storage_soc_pct": "40-60%",
+        "preconditioning": "Below 5°C before DC fast charging",
+        "ota_updates": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 74(1)(a)"
+      },
+      "dp56_waste_collection": {
+        "id": 56, "label": "Separate Collection Info",
+        "scheme": "Volvo dealer network (EU) + producer responsibility",
+        "regulation": "Art. 64 Reg. (EU) 2023/1542",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 74(1)(b)"
+      },
+      "dp57_waste_takeback": {
+        "id": 57, "label": "Take-Back & Collection Facilities",
+        "dealer_points_eu": 2300,
+        "recycling_partners": ["Umicore (Belgium/Europe)", "Retriev Technologies (North America)"],
+        "dealer_locator": "volvocars.com/dealers",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 74(1)(c)"
+      },
+      "dp58_waste_safety": {
+        "id": 58, "label": "Safety Instructions for Waste Batteries",
+        "transport_class": "ADR Class 9 (UN 3480 / UN 3481)",
+        "max_soc_transport_pct": 30,
+        "storage_temp_range_c": [10, 40],
+        "hf_risk": true,
+        "lithium_water_reaction": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 74(1)(d)"
+      },
+      "dp59_waste_labels": {
+        "id": 59, "label": "Meaning of Labels & Symbols",
+        "labels": ["CE mark", "Separate collection symbol", "111 kWh label", "QR code", "HV warning", "Notified Body Ref 0035"],
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 74(1)(e)"
+      },
+      "dp60_waste_substance_impacts": {
+        "id": 60, "label": "Effects of Hazardous Substances",
+        "impacts": [
+          {"substance": "Cobalt 9.6kg", "health": "Carcinogenic Cat 1B", "env": "Aquatic toxicity H410"},
+          {"substance": "Nickel 50.2kg", "health": "Carcinogenic Cat 1A", "env": "Aquatic toxicity H411"},
+          {"substance": "Lithium 7.4kg", "health": "Fire hazard, reactive with water", "env": "Limited ecotox data"},
+          {"substance": "LiPF6 2.8kg", "health": "Corrosive, toxic (HF on contact with water)", "env": "Hydrolysis to HF+PF5"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 74(1)(f)"
+      }
+    }
+  },
+
+  "group_g_composition": {
+    "label": "Detailed Composition & Disassembly",
+    "regulation": "Ann. XIII No. 2",
+    "data_points": {
+      "dp61_cathode_detail": {
+        "id": 61, "label": "Detailed Composition — Cathode",
+        "material": "NMC811 (LiNi0.8Mn0.1Co0.1O2)",
+        "status": "REAL", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(a)"
+      },
+      "dp62_anode_detail": {
+        "id": 62, "label": "Detailed Composition — Anode",
+        "material": "Natural and/or synthetic graphite",
+        "status": "REAL", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(a)"
+      },
+      "dp63_electrolyte_detail": {
+        "id": 63, "label": "Detailed Composition — Electrolyte",
+        "solvents": [
+          {"name": "Ethylene carbonate (EC)", "vol_pct": 25},
+          {"name": "Dimethyl carbonate (DMC)", "vol_pct": 30},
+          {"name": "Ethylmethyl carbonate (EMC)", "vol_pct": 45}
+        ],
+        "salt": "LiPF6 1.0 mol/L",
+        "additives": ["Vinylene carbonate 1-2%", "Fluoroethylene carbonate 1-3%"],
+        "total_mass_kg": 14.2,
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(a)"
+      },
+      "dp64_part_numbers": {
+        "id": 64, "label": "Part Numbers",
+        "parts": [
+          {"component": "Battery pack assembly", "part_number": "36011623"},
+          {"component": "Battery module NMC811 (x17)", "part_number": "36011847"},
+          {"component": "BMS master unit", "part_number": "36012094"},
+          {"component": "Cooling plate assembly", "part_number": "36010987"},
+          {"component": "Manual Service Disconnect (MSD)", "part_number": "36011234"},
+          {"component": "HV connector set", "part_number": "36011456"}
+        ],
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(b)"
+      },
+      "dp65_spare_parts_contacts": {
+        "id": 65, "label": "Spare Parts Supplier Contacts",
+        "suppliers": [
+          {"name": "Volvo Cars Parts & Accessories AB", "email": "parts@volvocars.com", "portal": "parts.volvocars.com"},
+          {"name": "CATL Europe GmbH", "email": "europe@catl.com", "note": "OEM only"}
+        ],
+        "dealer_network": "2300+ service points in EU — volvocars.com/dealers",
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(b)"
+      },
+      "dp66_disassembly_diagrams": {
+        "id": 66, "label": "Disassembly — Exploded Diagrams",
+        "available_via": "Volvo Cars Workshop Information System (VIDA)",
+        "battery_position": "Underfloor, between front and rear axle (SPA2 platform)",
+        "module_count": 17,
+        "layout": "2 rows, longitudinal, underfloor",
+        "status": "REAL", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(c)"
+      },
+      "dp67_disassembly_steps": {
+        "id": 67, "label": "Disassembly — Steps",
+        "steps": [
+          "1. Secure vehicle — pull MSD (driver side underfloor). Wait 5 min.",
+          "2. Verify HV de-energised with voltmeter (<60V).",
+          "3. Remove underbody protection (10x M8 bolts, Torx T40).",
+          "4. Disconnect coolant lines (front left), HV cables (orange), LV connectors (4x BMS).",
+          "5. Position battery lifting device (Volvo Tool 9818780).",
+          "6. Loosen 24x M12 mounting bolts (90 Nm). Lower battery (~625 kg).",
+          "7. Remove housing cover (32x M6 bolts). Disconnect busbars. Remove modules (4x M8 each)."
+        ],
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(c)"
+      },
+      "dp68_joining_techniques": {
+        "id": 68, "label": "Disassembly — Joining Techniques",
+        "mechanical": [
+          {"connection": "Pack to vehicle", "fastener": "24x M12", "torque_nm": 90},
+          {"connection": "Module to housing", "fastener": "4x M8 per module (68 total)", "torque_nm": 25},
+          {"connection": "Housing cover", "fastener": "32x M6", "torque_nm": 10}
+        ],
+        "electrical": [
+          {"connection": "HV busbars", "fastener": "M5 bolted, 6 Nm copper"},
+          {"connection": "HV vehicle connectors", "type": "Twist-lock IP67"}
+        ],
+        "thermal": [
+          {"connection": "Coolant lines", "type": "Quick-connect 1/2 inch push-to-connect"}
+        ],
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(c)"
+      },
+      "dp69_required_tools": {
+        "id": 69, "label": "Disassembly — Required Tools",
+        "safety": ["HV gloves Class 0 (1000V)", "HV visor", "Insulated tools IEC 60900", "HV voltmeter CAT III", "Insulating mat"],
+        "standard": ["Hydraulic lift min 3t", "Torque wrench 5-100 Nm", "Socket set Torx T40/T45, hex 8-17mm"],
+        "special": ["Volvo Special Tool 9818780 (battery lift, MANDATORY)", "HV insulation tester", "Volvo VIDA diagnostic interface"],
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(c)"
+      },
+      "dp70_damage_warnings": {
+        "id": 70, "label": "Disassembly — Damage Risk Warnings",
+        "danger_to_life": "400V DC — lethal even with ignition off. Wait 5 min after MSD pull.",
+        "fire_hazard": "Thermal runaway generates toxic gases (HF, CO, CO2). Re-ignition risk up to 48h.",
+        "chemical_hazard": "LiPF6 highly toxic and corrosive. Lithium reacts with water (explosion risk).",
+        "mechanical_hazard": "Battery 625 kg. Never work under unsecured battery.",
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(c)"
+      },
+      "dp71_cell_count": {
+        "id": 71, "label": "Disassembly — Cell Count & Arrangement",
+        "modules": 17,
+        "cells_per_module": 14,
+        "total_cells": 238,
+        "arrangement_per_module": "2P7S",
+        "pack_voltage_v": 408,
+        "cell_capacity_ah": 102,
+        "cell_nominal_v": 3.43,
+        "cell_max_v": 4.20,
+        "cell_min_v": 2.80,
+        "housing": "Aluminium die-cast IP67",
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(c)"
+      },
+      "dp72_safety_measures": {
+        "id": 72, "label": "Safety Measures",
+        "active_bms": {
+          "cell_voltage_sensors": 238,
+          "temperature_sensors": 136,
+          "monitoring_interval_ms": 10,
+          "overcharge_cutoff_v": 4.22,
+          "deep_discharge_cutoff_v": 2.80,
+          "max_current_a": 625
+        },
+        "passive": {
+          "housing": "Aluminium IP67, 6mm wall",
+          "fuses": "2x HV fuse 630A 1000V",
+          "cooling_capacity_kw": 7
+        },
+        "status": "MOCK", "access_level": 2,
+        "legal_basis": "Annex XIII, point 2(d)"
+      }
+    }
+  },
+
+  "group_h_authority": {
+    "label": "Authority Information",
+    "regulation": "Ann. XIII No. 3",
+    "data_points": {
+      "dp73_test_reports": {
+        "id": 73, "label": "Test Report Results",
+        "testing_institute": "TÜV Rheinland AG, Cologne (Ref. 0035)",
+        "report_number": "TR-BAT-2024-00847-DE",
+        "period": "January-February 2024",
+        "results": {
+          "safety_iec62133": "PASS",
+          "electrical_iec62660": "PASS",
+          "carbon_iso14067": "PASS — 65.8 kg CO2e/kWh verified",
+          "due_diligence": "PASS — OECD conformity confirmed",
+          "battery_regulation": "PASS — All Annex XIII requirements met"
+        },
+        "status": "REAL", "access_level": 3,
+        "legal_basis": "Annex XIII, point 3"
+      },
+      "dp74_ce_notified_body_ref": {
+        "id": 74, "label": "CE Marking — Notified Body Reference",
+        "notified_body": "TÜV Rheinland AG",
+        "reference_number": "0035",
+        "report_number": "TR-BAT-2024-00847-DE",
+        "test_date": "January-February 2024",
+        "overall_result": "Conformity with Reg. (EU) 2023/1542 fully confirmed",
+        "status": "MOCK", "access_level": 3,
+        "legal_basis": "Art. 20(3); Annex VIII"
+      }
+    }
+  },
+
+  "group_i_individual_performance": {
+    "label": "Individual Battery — Performance & Durability",
+    "regulation": "Ann. XIII No. 4a; Ann. IV Part A",
+    "data_points": {
+      "dp75_current_capacity": {
+        "id": 75, "label": "Current Rated Capacity & Capacity Loss",
+        "rated_ah": 272, "usable_kwh": 107,
+        "capacity_loss_pct": 0.0,
+        "measurement": "IEC 62660-1, 0.33C, 25°C",
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4a; Annex IV-A-1"
+      },
+      "dp76_current_power": {
+        "id": 76, "label": "Current Power & Power Loss",
+        "peak_power_w": 300000, "continuous_power_w": 185000,
+        "power_loss_pct": 0.0,
+        "dc_charging_w": 250000,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4a; Annex IV-A-2"
+      },
+      "dp77_current_resistance": {
+        "id": 77, "label": "Current Internal Resistance & Increase",
+        "pack_resistance_mohm": 34.8,
+        "cell_resistance_mohm": 0.92,
+        "resistance_increase_pct": 0.0,
+        "method": "EIS at 25°C, 50% SoC",
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4a; Annex IV-A-3"
+      },
+      "dp78_rtw_current": {
+        "id": 78, "label": "Current Round-Trip Efficiency",
+        "value_pct": 93.2,
+        "rtw_loss_pct": 0.0,
+        "charging_losses_pct": 2.8,
+        "discharging_losses_pct": 4.0,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4a; Annex IV-A-4"
+      },
+      "dp79_remaining_lifetime": {
+        "id": 79, "label": "Expected Remaining Lifetime",
+        "cycles_remaining": 1000,
+        "calendar_years": 15,
+        "warranty_years": 8,
+        "warranty_km": 160000,
+        "reference": "WLTC cycle, 25°C, 20-80% SoC",
+        "status": "REAL", "access_level": 4,
+        "legal_basis": "Annex XIII-4a; Annex IV-A-5"
+      }
+    }
+  },
+
+  "group_j_soh": {
+    "label": "Individual Battery — State of Health",
+    "regulation": "Ann. XIII No. 4b; Ann. VII Part A",
+    "data_points": {
+      "dp80_soce": {
+        "id": 80, "label": "SoH — State of Certified Energy (SOCE)",
+        "value_kwh": 111.0,
+        "pct_of_rated": 100.0,
+        "measurement": "UNECE GTR No. 22",
+        "last_measured": "2024-04-12",
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII Part A"
+      },
+      "dp81_remaining_capacity": {
+        "id": 81, "label": "SoH — Remaining Capacity",
+        "value_kwh": 107.0,
+        "pct_of_rated": 100.0,
+        "capacity_loss_kwh": 0.0,
+        "warranty_threshold_kwh": 77.7,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-A-1"
+      },
+      "dp82_remaining_power": {
+        "id": 82, "label": "SoH — Remaining Power Capability",
+        "value_kw": 300.0,
+        "pct_of_rated": 100.0,
+        "power_loss_kw": 0.0,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-A-2"
+      },
+      "dp83_remaining_rtw": {
+        "id": 83, "label": "SoH — Remaining Round-Trip Efficiency",
+        "value_pct": 93.2,
+        "loss_pct": 0.0,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-A-3"
+      },
+      "dp84_self_discharge": {
+        "id": 84, "label": "SoH — Self-Discharge Rate",
+        "value_pct_per_month": 1.8,
+        "absolute_loss_kwh_per_month": 1.9,
+        "normal_range": [1.5, 2.5],
+        "warning_threshold_pct": 5.0,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-A-4"
+      },
+      "dp85_ohmic_resistance": {
+        "id": 85, "label": "SoH — Ohmic Resistance",
+        "value_mohm": 34.8,
+        "reference_value_mohm": 34.8,
+        "increase_pct": 0.0,
+        "method": "EIS at 25°C, 50% SoC",
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-A-5"
+      }
+    }
+  },
+
+  "group_k_lifetime": {
+    "label": "Individual Battery — Expected Lifetime",
+    "regulation": "Ann. XIII No. 4b; Ann. VII Part B",
+    "data_points": {
+      "dp86_manufacture_commissioning": {
+        "id": 86, "label": "Date of Manufacture & Commissioning",
+        "manufacture_year": 2024,
+        "commissioning_date": "linked to VIN",
+        "warranty_start": "first registration",
+        "status": "REAL", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-B-1"
+      },
+      "dp87_energy_throughput": {
+        "id": 87, "label": "Energy Throughput (cumulative)",
+        "current_kwh": 0,
+        "reference_eol_kwh": 185000,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-B-2"
+      },
+      "dp88_capacity_throughput": {
+        "id": 88, "label": "Capacity Throughput (cumulative)",
+        "current_ah": 0,
+        "reference_eol_ah": 454000,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-B-3"
+      },
+      "dp89_deep_discharges": {
+        "id": 89, "label": "Deep Discharges Count",
+        "count": 0,
+        "threshold_soc_pct": 10,
+        "bms_cutoff_soc_pct": 5,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-B-4"
+      },
+      "dp90_extreme_temperatures": {
+        "id": 90, "label": "Time under Extreme Temperatures",
+        "hours_above_55c": 0,
+        "hours_charging_above_50c": 0,
+        "hours_storage_above_60c": 0,
+        "bms_monitoring_interval_s": 10,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-B-4"
+      },
+      "dp91_full_cycles": {
+        "id": 91, "label": "Equivalent Full Cycles (FEC)",
+        "current_fec": 0.0,
+        "expected_fec_to_eol": 1670,
+        "fec_definition": "1 FEC = 272 Ah complete discharge",
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII-4b; Annex VII-B-5"
+      }
+    }
+  },
+
+  "group_l_operational": {
+    "label": "Individual Battery — Operational Data",
+    "regulation": "Ann. XIII No. 4c & 4d",
+    "data_points": {
+      "dp92_battery_status": {
+        "id": 92, "label": "Battery Status",
+        "status_value": "unchanged",
+        "possible_values": ["unchanged", "repaired", "repurposed", "remanufactured", "waste"],
+        "status": "REAL", "access_level": 4,
+        "legal_basis": "Annex XIII-4c; Art. 77(7)"
+      },
+      "dp93_charge_cycles": {
+        "id": 93, "label": "Number of Charge/Discharge Cycles",
+        "charge_cycles": 0,
+        "discharge_cycles": 0,
+        "cycle_definition": "Charge: any SoC to >=90%. Discharge: >=90% to <20%.",
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII, point 4(d)"
+      },
+      "dp94_negative_events": {
+        "id": 94, "label": "Negative Events (Accidents etc.)",
+        "accidents": 0,
+        "thermal_runaway": 0,
+        "deep_discharges": 0,
+        "overcharge_events": 0,
+        "overtemperature_events": 0,
+        "short_circuits": 0,
+        "hv_insulation_faults": 0,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII, point 4(d)"
+      },
+      "dp95_operating_temperature": {
+        "id": 95, "label": "Regularly Recorded Operating Temperature",
+        "min_cell_c": 12.4,
+        "max_cell_c": 38.7,
+        "avg_cell_c": 24.3,
+        "hours_above_45c": 0,
+        "hours_below_minus10c": 0,
+        "sensors_count": 136,
+        "measurement_interval_s": 10,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII, point 4(d)"
+      },
+      "dp96_state_of_charge": {
+        "id": 96, "label": "Regularly Recorded State of Charge",
+        "current_soc_pct": 82.4,
+        "current_soc_kwh": 88.4,
+        "delivery_soc_pct": 80.0,
+        "avg_charge_start_pct": 22.3,
+        "avg_charge_end_pct": 81.6,
+        "full_charges_count": 2,
+        "bms_accuracy_pct": 2.0,
+        "status": "MOCK", "access_level": 4,
+        "legal_basis": "Annex XIII, point 4(d)"
+      }
+    }
+  },
+
+  "group_m_metadata": {
+    "label": "Identification & Technical Metadata",
+    "regulation": "Art. 77; Art. 13(6); Annex VIII",
+    "data_points": {
+      "dp97_unique_identifier": {
+        "id": 97, "label": "Individual Battery Identifier",
+        "format": "ISO/IEC 15459-1:2014 compliant",
+        "example": "BAT-VC-EX90-2024-[unique sequence]",
+        "technology": "Blockchain-anchored (Circulor)",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 77(3)"
+      },
+      "dp98_qr_code": {
+        "id": 98, "label": "QR Code",
+        "affixed": true,
+        "location": "Driver's door frame",
+        "technology": "Blockchain-anchored (Circulor)",
+        "format": "ISO/IEC 18004 (QR Code 2005)",
+        "min_size_mm": 20,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 13(6); Annex VI Part C"
+      },
+      "dp99_operating_instructions": {
+        "id": 99, "label": "Operating Instructions Reference",
+        "charging_range": "20-80% SoC daily",
+        "max_dc_per_day": 2,
+        "storage_soc": "40-60%",
+        "emergency_contact": "+46 31 59 00 00",
+        "manual_url": "volvocars.com/owners",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 38(1)(a)"
+      },
+      "dp100_second_life_link": {
+        "id": 100, "label": "Link to Previous Battery Passport",
+        "applicable": false,
+        "note": "New vehicle EX90 MY24 — no predecessor battery",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 77(7)"
+      },
+      "dp101_standards": {
+        "id": 101, "label": "Applied Harmonised Standards",
+        "standards": [
+          "ISO 14067:2018 (CO2 footprint)",
+          "IEC 62660-1:2018 (performance testing)",
+          "IEC 62133-2:2017 (safety)",
+          "UN 38.3 (transport safety)",
+          "UNECE GTR No. 22 (SOCE/SOCH)",
+          "ISO/IEC 15459-1 (unique identifiers)",
+          "GS1 Digital Link (QR code format)",
+          "Reg. (EU) 2023/1542 (Battery Regulation)",
+          "Reg. (EU) No. 765/2008 (CE marking)"
+        ],
+        "status": "REAL", "access_level": 3,
+        "legal_basis": "Annex VIII point (e)"
+      },
+      "dp102_technical_description": {
+        "id": 102, "label": "Technical Documentation — General Description",
+        "designation": "EX90 NMC811 111 kWh Lithium-Ion Traction Battery",
+        "category": "Electric Vehicle Battery (EV Battery)",
+        "intended_use": "Electrical energy storage for propulsion of Volvo EX90",
+        "nominal_energy_kwh": 111,
+        "usable_energy_kwh": 107,
+        "nominal_voltage_v": 408,
+        "cell_chemistry_cathode": "NMC811",
+        "cell_chemistry_anode": "Graphite",
+        "cell_format": "Prismatic (CATL)",
+        "total_cells": 238,
+        "total_modules": 17,
+        "status": "REAL", "access_level": 3,
+        "legal_basis": "Annex VIII point (a)"
+      }
+    }
+  }
+}

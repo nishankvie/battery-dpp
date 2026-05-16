@@ -1,0 +1,60 @@
+{
+  "recycled_content_targets": {
+    "2024": {"cobalt_pct": 0, "lithium_pct": 0, "nickel_pct": 0, "lead_pct": 0},
+    "2031": {"cobalt_pct": 16, "lithium_pct": 6, "nickel_pct": 6, "lead_pct": 85},
+    "2036": {"cobalt_pct": 26, "lithium_pct": 12, "nickel_pct": 15, "lead_pct": 85}
+  },
+  "carbon_class_boundaries": {
+    "A": [0, 40], "B": [40, 80], "C": [80, 120], "D": [120, 9999]
+  },
+  "mandatory_dpp_date": "2027-02-18",
+  "mandatory_requirements_2024": [
+    "Battery category and model identification",
+    "Manufacturer identification with EU contact",
+    "Chemical composition declared",
+    "Hazardous substances listed",
+    "CE marking affixed",
+    "EU Declaration of Conformity issued",
+    "Notified body reference present",
+    "Separate collection symbol",
+    "Capacity indication on label",
+    "Waste information provided",
+    "Critical raw materials listed"
+  ],
+  "mandatory_requirements_2027": [
+    "All 2024 requirements",
+    "QR code linking to Digital Battery Passport",
+    "Carbon footprint declared (Art. 7)",
+    "Carbon performance class assigned",
+    "Recycled content declared per material (Art. 8)",
+    "Due diligence policy published (Art. 48)",
+    "Annual due diligence report (Art. 52)",
+    "Individual battery identifier (ISO/IEC 15459-1)",
+    "State of Health parameters accessible",
+    "Operational data accessible"
+  ],
+  "mandatory_requirements_2031": [
+    "All 2027 requirements",
+    "Cobalt recycled content >= 16%",
+    "Lithium recycled content >= 6%",
+    "Nickel recycled content >= 6%",
+    "Lead recycled content >= 85%"
+  ],
+  "mandatory_requirements_2036": [
+    "All 2031 requirements",
+    "Cobalt recycled content >= 26%",
+    "Lithium recycled content >= 12%",
+    "Nickel recycled content >= 15%"
+  ],
+  "geopolitical_risk_scores": {
+    "DRC": 8, "China": 6, "Russia": 9, "Indonesia": 5,
+    "Philippines": 5, "Chile": 4, "Australia": 2,
+    "Canada": 1, "Norway": 1, "USA": 2, "Germany": 1,
+    "South Korea": 2, "Japan": 2, "Unknown": 7
+  },
+  "esg_risk_scores": {
+    "DRC": 8, "China": 6, "Indonesia": 6, "Chile": 5,
+    "Australia": 2, "Canada": 2, "Germany": 1,
+    "Unknown": 8
+  }
+}

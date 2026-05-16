@@ -1,0 +1,252 @@
+{
+  "meta": {
+    "manufacturer_id": "generic_oem",
+    "manufacturer_name": "Shenzhen PowerCell Tech Co., Ltd.",
+    "manufacturer_country": "China",
+    "model_id": "lfp_80kwh",
+    "model_name": "PCB-EV-80 LFP Battery Pack",
+    "chemistry": "LFP",
+    "capacity_kwh": 80,
+    "verification_status": "NON_COMPLIANT",
+    "overall_score": 18,
+    "trust_score": 22.0,
+    "data_real_pct": 12,
+    "data_mock_pct": 88,
+    "anomaly_flags": [
+      "No EU Declaration of Conformity found. CE marking unverifiable.",
+      "Carbon footprint not declared — mandatory under Art. 7 Reg. (EU) 2023/1542.",
+      "No independent third-party supply chain verification. No blockchain traceability.",
+      "Voltage × Capacity cross-check FAIL: 320V × 220Ah = 70,400 Wh but declared 80 kWh (13.6% gap).",
+      "Manufacturer contact details incomplete — no EU responsible person declared.",
+      "Recycled content 0% declared but no evidence provided as required by Art. 52(4).",
+      "No notified body reference. Conformity assessment procedure not documented."
+    ]
+  },
+
+  "group_a_general": {
+    "label": "General Battery Information",
+    "data_points": {
+      "dp1_manufacturer": {
+        "id": 1, "label": "Manufacturer Identification",
+        "value": "Shenzhen PowerCell Tech Co., Ltd. No data on EU representative.",
+        "eu_representative": null,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-1",
+        "flag": "No EU responsible person declared — required for non-EU manufacturer"
+      },
+      "dp2_battery_model": {
+        "id": 2, "label": "Battery Category & Model",
+        "value": "EV Battery | PCB-EV-80 LFP 80 kWh | Cell Manufacturer: Internal (unknown)",
+        "chemistry": "LFP",
+        "category": "Electric Vehicle Battery",
+        "cell_manufacturer": "Unknown / Internal",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-2"
+      },
+      "dp3_place_of_manufacture": {
+        "id": 3, "label": "Place of Manufacture",
+        "cells_location": "Shenzhen, Guangdong, China",
+        "assembly_location": "Shenzhen, Guangdong, China",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-3"
+      },
+      "dp4_date_of_manufacture": {"id": 4, "label": "Date of Manufacture", "value": "2024", "year": 2024, "status": "MOCK", "access_level": 1, "legal_basis": "Annex VI-A-4"},
+      "dp5_battery_weight": {"id": 5, "label": "Battery Weight", "modules_kg": 420, "complete_system_kg": 510, "status": "MOCK", "access_level": 1, "legal_basis": "Annex VI-A-5"},
+      "dp6_rated_capacity": {"id": 6, "label": "Rated Capacity", "gross_kwh": 80, "net_kwh": 76, "status": "MOCK", "access_level": 1, "legal_basis": "Annex VI-A-6"},
+      "dp7_chemical_composition": {
+        "id": 7, "label": "Chemical Composition",
+        "cathode": "LFP (LiFePO4)",
+        "anode": "Graphite",
+        "electrolyte": "Liquid LiPF6 solution",
+        "cell_format": "Prismatic",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-7"
+      },
+      "dp8_hazardous_substances": {
+        "id": 8, "label": "Hazardous Substances",
+        "substances": [
+          {"name": "LiPF6", "mass_kg": 2.2, "hazard": "corrosive, toxic"},
+          {"name": "Iron phosphate", "mass_kg": 92.0, "hazard": "low toxicity"},
+          {"name": "Lithium", "mass_kg": 5.8, "hazard": "reactive with water"}
+        ],
+        "note": "LFP chemistry significantly safer than NMC — no cobalt or nickel",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-8"
+      },
+      "dp9_fire_extinguishing": {"id": 9, "label": "Fire Extinguishing", "primary": "Water", "status": "MOCK", "access_level": 1, "legal_basis": "Annex VI-A-9"},
+      "dp10_critical_raw_materials": {"id": 10, "label": "Critical Raw Materials", "crm_list": ["Lithium", "Natural Graphite"], "note": "LFP contains no cobalt or nickel", "status": "MOCK", "access_level": 1, "legal_basis": "Annex VI-A-10"}
+    }
+  },
+
+  "group_b_carbon": {
+    "label": "Carbon Footprint",
+    "data_points": {
+      "dp11_carbon_total": {
+        "id": 11, "label": "Carbon Footprint — Total Value",
+        "value_kg_co2_per_kwh": null,
+        "total_kg_co2": null,
+        "declared": false,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(d)",
+        "flag": "CRITICAL — Carbon footprint not declared. Mandatory under Art. 7 Reg. (EU) 2023/1542."
+      },
+      "dp12_carbon_class": {"id": 12, "label": "Carbon Class", "declared_class": null, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(2)", "flag": "Not declared"},
+      "dp13_carbon_admin": {"id": 13, "label": "Carbon Admin", "value": "Not provided", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(a)"},
+      "dp14_carbon_model": {"id": 14, "label": "Carbon Model Details", "model": "PCB-EV-80 LFP 80 kWh", "nominal_capacity_ah": 220, "nominal_voltage_v": 320, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(b)"},
+      "dp15_carbon_location": {"id": 15, "label": "Carbon Location", "value": "Shenzhen, China", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(c)"},
+      "dp16_carbon_lifecycle": {"id": 16, "label": "Carbon Lifecycle", "phases": null, "note": "Not declared", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(e)", "flag": "Not declared"},
+      "dp17_carbon_doc_ref": {"id": 17, "label": "Carbon DoC Ref", "reference": null, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(f)", "flag": "No DoC reference"},
+      "dp18_carbon_web_link": {"id": 18, "label": "Carbon Web Link", "url": null, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(g)", "flag": "No web link provided"}
+    }
+  },
+
+  "group_c_recycled": {
+    "label": "Recycled Content",
+    "data_points": {
+      "dp19_recycled_cobalt": {"id": 19, "label": "Recycled Cobalt", "current_pct": 0, "note": "LFP contains no cobalt", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 8(1)"},
+      "dp20_recycled_lithium": {"id": 20, "label": "Recycled Lithium", "current_pct": 0, "target_2031_pct": 6, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 8(1)"},
+      "dp21_recycled_nickel": {"id": 21, "label": "Recycled Nickel", "current_pct": 0, "note": "LFP contains no nickel", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 8(1)"},
+      "dp22_recycled_lead": {"id": 22, "label": "Recycled Lead", "current_pct": 0, "labelling_required": false, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 8(1)"},
+      "dp23_renewable_energy": {"id": 23, "label": "Renewable Energy", "cell_manufacturing_pct": 15, "pack_assembly_pct": 15, "note": "Standard Chinese grid — minimal renewables", "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(f)"}
+    }
+  },
+
+  "group_d_sourcing": {
+    "label": "Responsible Sourcing",
+    "data_points": {
+      "dp24_due_diligence_strategy": {"id": 24, "label": "Due Diligence", "frameworks": ["None declared"], "traceability": "None", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 48", "flag": "No due diligence framework declared"},
+      "dp25_due_diligence_report": {"id": 25, "label": "DD Report", "report": "Not published", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 52(3)", "flag": "No annual report published"},
+      "dp26_independent_verification": {"id": 26, "label": "Independent Verification", "verifier": "None", "result": "Not performed", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 51", "flag": "CRITICAL — No independent supply chain verification"},
+      "dp27_raw_material_description": {"id": 27, "label": "Raw Materials", "materials": [{"name": "Lithium", "trade_name": "Unknown grade"}, {"name": "Iron phosphate", "trade_name": "Unknown supplier"}], "status": "MOCK", "access_level": 1, "legal_basis": "Art. 49(2)(a)"},
+      "dp28_supplier_names": {"id": 28, "label": "Suppliers", "suppliers": [{"role": "All", "name": "Internal / undisclosed", "location": "China"}], "status": "MOCK", "access_level": 1, "legal_basis": "Art. 49(2)(b)", "flag": "Suppliers not disclosed"},
+      "dp29_country_of_origin": {"id": 29, "label": "Origin", "origins": {"lithium": {"country": "Unknown", "geopolitical_risk": 5}, "graphite": {"country": "China", "geopolitical_risk": 6}}, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 49(2)(c)"},
+      "dp30_raw_material_quantities": {"id": 30, "label": "Material Quantities", "note": "Not disclosed", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 49(2)(d)"},
+      "dp31_audit_report": {"id": 31, "label": "Audit Report", "auditor": "None", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 49(2)(e)", "flag": "No independent audit"},
+      "dp32_conflict_areas": {"id": 32, "label": "Conflict Areas", "note": "LFP contains no cobalt — lower conflict risk", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 49(2)(f)"},
+      "dp33_recycled_source_evidence": {"id": 33, "label": "Recycled Evidence", "note": "No evidence provided", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 52(4)"}
+    }
+  },
+
+  "group_e_electrical": {
+    "label": "Electrical Characteristics",
+    "data_points": {
+      "dp34_rated_capacity_ah": {"id": 34, "label": "Rated Capacity", "value_ah": 220, "usable_kwh": 76, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(g)"},
+      "dp35_min_voltage": {"id": 35, "label": "Min Voltage", "value_v": 256, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(h)"},
+      "dp36_nominal_voltage": {"id": 36, "label": "Nominal Voltage", "value_v": 320, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(h)"},
+      "dp37_max_voltage": {"id": 37, "label": "Max Voltage", "value_v": 336, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(h)"},
+      "dp38_power_capability": {"id": 38, "label": "Power Capability", "peak_discharge_kw": 120, "dc_charging_kw": 80, "ac_charging_kw_3phase": 11, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(i)"},
+      "dp39_power_limits": {"id": 39, "label": "Power Limits", "max_discharge_kw": 120, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(i)"},
+      "dp40_expected_lifetime": {"id": 40, "label": "Lifetime", "cycles_to_70pct_soh": 2000, "warranty_years": 3, "warranty_km": 100000, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(j)"},
+      "dp41_capacity_threshold": {"id": 41, "label": "Capacity Threshold", "soh_threshold_pct": 70, "threshold_kwh": 56.0, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(k)"},
+      "dp42_storage_temperature": {"id": 42, "label": "Storage Temp", "min_c": -20, "max_c": 55, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(l)"},
+      "dp43_warranty_calendar": {"id": 43, "label": "Warranty", "years": 3, "km": 100000, "soh_threshold_pct": 70, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(m)"},
+      "dp44_rtw_initial": {"id": 44, "label": "RTW Initial", "value_pct": 95.5, "note": "LFP has high RTW efficiency", "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(n)"},
+      "dp45_rtw_50pct": {"id": 45, "label": "RTW 50% Cycles", "value_pct": 93.0, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(n)"},
+      "dp46_internal_resistance_cell": {"id": 46, "label": "Cell Resistance", "value_mohm": 0.35, "note": "LFP cells have lower internal resistance", "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(o)"},
+      "dp47_internal_resistance_pack": {"id": 47, "label": "Pack Resistance", "value_mohm": 28.0, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(o)"},
+      "dp48_c_rate": {"id": 48, "label": "C-Rate", "charge_c": 0.5, "discharge_c": 1.0, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(p)"}
+    }
+  },
+
+  "group_f_conformity": {
+    "label": "Conformity & Labelling",
+    "data_points": {
+      "dp49_eu_doc": {"id": 49, "label": "EU DoC", "issued_by": null, "present": false, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 18", "flag": "CRITICAL — No EU Declaration of Conformity"},
+      "dp50_doc_reference": {"id": 50, "label": "DoC Reference", "reference": null, "notified_body": null, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(f)", "flag": "No reference number"},
+      "dp51_ce_marking": {"id": 51, "label": "CE Marking", "affixed": "unverified", "notified_body_ref": null, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 19", "flag": "CE marking present but notified body reference missing"},
+      "dp52_labelling": {"id": 52, "label": "Labelling", "separate_collection_symbol": false, "capacity_label": "80 kWh", "qr_code": false, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 13", "flag": "Missing separate collection symbol and QR code"},
+      "dp53_cadmium_marking": {"id": 53, "label": "Cd Marking", "cd_pct": 0.0, "labelling_required": false, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 13(5)"},
+      "dp54_lead_marking": {"id": 54, "label": "Pb Marking", "pb_pct": 0.0, "labelling_required": false, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 13(5)"},
+      "dp55_waste_usage": {"id": 55, "label": "Usage Recs", "daily_charge_range": "Not specified", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(a)"},
+      "dp56_waste_collection": {"id": 56, "label": "Collection", "scheme": "Not declared", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(b)", "flag": "No collection scheme declared"},
+      "dp57_waste_takeback": {"id": 57, "label": "Take-Back", "dealer_points_eu": 0, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(c)", "flag": "No EU take-back network"},
+      "dp58_waste_safety": {"id": 58, "label": "Waste Safety", "transport_class": "ADR Class 9", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(d)"},
+      "dp59_waste_labels": {"id": 59, "label": "Label Meanings", "labels": ["Capacity label only"], "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(e)"},
+      "dp60_waste_substance_impacts": {"id": 60, "label": "Substance Impacts", "note": "LFP — no cobalt/nickel. Lower hazard profile.", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(f)"}
+    }
+  },
+
+  "group_g_composition": {
+    "label": "Composition & Disassembly",
+    "data_points": {
+      "dp61_cathode_detail": {"id": 61, "label": "Cathode", "material": "LFP (LiFePO4)", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(a)"},
+      "dp62_anode_detail": {"id": 62, "label": "Anode", "material": "Graphite", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(a)"},
+      "dp63_electrolyte_detail": {"id": 63, "label": "Electrolyte", "salt": "LiPF6", "total_mass_kg": 11.0, "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(a)"},
+      "dp64_part_numbers": {"id": 64, "label": "Part Numbers", "parts": [], "note": "Not disclosed", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(b)", "flag": "No part numbers provided"},
+      "dp65_spare_parts_contacts": {"id": 65, "label": "Spare Parts Contacts", "suppliers": [{"name": "Shenzhen PowerCell Tech", "note": "No EU service network"}], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(b)"},
+      "dp66_disassembly_diagrams": {"id": 66, "label": "Disassembly Diagrams", "available_via": "Not available", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)", "flag": "No disassembly documentation"},
+      "dp67_disassembly_steps": {"id": 67, "label": "Disassembly Steps", "steps": ["No official procedure documented"], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp68_joining_techniques": {"id": 68, "label": "Joining Techniques", "note": "Not documented", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp69_required_tools": {"id": 69, "label": "Required Tools", "note": "Not documented", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp70_damage_warnings": {"id": 70, "label": "Damage Warnings", "danger_to_life": "320V DC system — dangerous", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp71_cell_count": {"id": 71, "label": "Cell Count", "modules": 8, "cells_per_module": 32, "total_cells": 256, "arrangement": "4P8S per module", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp72_safety_measures": {"id": 72, "label": "Safety Measures", "active_bms": {"cell_voltage_sensors": 256, "temperature_sensors": 32, "monitoring_interval_ms": 100}, "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(d)"}
+    }
+  },
+
+  "group_h_authority": {
+    "label": "Authority Information",
+    "data_points": {
+      "dp73_test_reports": {"id": 73, "label": "Test Reports", "testing_institute": "None — no notified body test", "report_number": null, "results": {"safety": "NOT TESTED by notified body", "carbon": "NOT DECLARED"}, "status": "MOCK", "access_level": 3, "legal_basis": "Annex XIII, point 3", "flag": "CRITICAL — No notified body test reports"},
+      "dp74_ce_notified_body_ref": {"id": 74, "label": "Notified Body Ref", "notified_body": null, "reference_number": null, "status": "MOCK", "access_level": 3, "legal_basis": "Art. 20(3)", "flag": "CRITICAL — No notified body reference"}
+    }
+  },
+
+  "group_i_individual_performance": {
+    "label": "Individual Performance",
+    "data_points": {
+      "dp75_current_capacity": {"id": 75, "label": "Current Capacity", "rated_ah": 220, "usable_kwh": 76, "capacity_loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp76_current_power": {"id": 76, "label": "Current Power", "peak_power_w": 120000, "power_loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp77_current_resistance": {"id": 77, "label": "Current Resistance", "pack_resistance_mohm": 28.0, "resistance_increase_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp78_rtw_current": {"id": 78, "label": "Current RTW", "value_pct": 95.5, "rtw_loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp79_remaining_lifetime": {"id": 79, "label": "Remaining Lifetime", "cycles_remaining": 2000, "calendar_years": 10, "warranty_years": 3, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"}
+    }
+  },
+
+  "group_j_soh": {
+    "label": "State of Health",
+    "data_points": {
+      "dp80_soce": {"id": 80, "label": "SOCE", "value_kwh": 80.0, "pct_of_rated": 100.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp81_remaining_capacity": {"id": 81, "label": "Remaining Capacity", "value_kwh": 76.0, "pct_of_rated": 100.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp82_remaining_power": {"id": 82, "label": "Remaining Power", "value_kw": 120.0, "pct_of_rated": 100.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp83_remaining_rtw": {"id": 83, "label": "Remaining RTW", "value_pct": 95.5, "loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp84_self_discharge": {"id": 84, "label": "Self Discharge", "value_pct_per_month": 1.2, "normal_range": [1.0, 2.0], "note": "LFP has very low self-discharge", "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp85_ohmic_resistance": {"id": 85, "label": "Ohmic Resistance", "value_mohm": 28.0, "increase_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"}
+    }
+  },
+
+  "group_k_lifetime": {
+    "label": "Expected Lifetime",
+    "data_points": {
+      "dp86_manufacture_commissioning": {"id": 86, "label": "Manufacture Date", "manufacture_year": 2024, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp87_energy_throughput": {"id": 87, "label": "Energy Throughput", "current_kwh": 0, "reference_eol_kwh": 160000, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp88_capacity_throughput": {"id": 88, "label": "Capacity Throughput", "current_ah": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp89_deep_discharges": {"id": 89, "label": "Deep Discharges", "count": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp90_extreme_temperatures": {"id": 90, "label": "Extreme Temperatures", "hours_above_55c": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp91_full_cycles": {"id": 91, "label": "Full Cycles", "current_fec": 0.0, "expected_fec_to_eol": 3000, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"}
+    }
+  },
+
+  "group_l_operational": {
+    "label": "Operational Data",
+    "data_points": {
+      "dp92_battery_status": {"id": 92, "label": "Battery Status", "status_value": "unchanged", "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4c"},
+      "dp93_charge_cycles": {"id": 93, "label": "Charge Cycles", "charge_cycles": 0, "discharge_cycles": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"},
+      "dp94_negative_events": {"id": 94, "label": "Negative Events", "accidents": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"},
+      "dp95_operating_temperature": {"id": 95, "label": "Operating Temp", "min_cell_c": 18.0, "max_cell_c": 32.0, "avg_cell_c": 24.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"},
+      "dp96_state_of_charge": {"id": 96, "label": "State of Charge", "current_soc_pct": 65.0, "delivery_soc_pct": 50.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"}
+    }
+  },
+
+  "group_m_metadata": {
+    "label": "Identification & Metadata",
+    "data_points": {
+      "dp97_unique_identifier": {"id": 97, "label": "Unique Identifier", "format": "Proprietary (non-compliant with ISO/IEC 15459-1)", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 77(3)", "flag": "Non-standard identifier format"},
+      "dp98_qr_code": {"id": 98, "label": "QR Code", "affixed": false, "note": "No QR code provided", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 13(6)", "flag": "No QR code — required from 2027"},
+      "dp99_operating_instructions": {"id": 99, "label": "Operating Instructions", "manual_url": "Not available in EU languages", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 38(1)(a)", "flag": "No EU-language manual"},
+      "dp100_second_life_link": {"id": 100, "label": "Second Life Link", "applicable": false, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 77(7)"},
+      "dp101_standards": {"id": 101, "label": "Applied Standards", "standards": ["Unknown — not declared"], "status": "MOCK", "access_level": 3, "legal_basis": "Annex VIII point (e)", "flag": "No harmonised standards declared"},
+      "dp102_technical_description": {"id": 102, "label": "Technical Description", "designation": "PCB-EV-80 LFP Battery Pack", "category": "EV Battery", "total_cells": 256, "total_modules": 8, "status": "MOCK", "access_level": 3, "legal_basis": "Annex VIII point (a)"}
+    }
+  }
+}

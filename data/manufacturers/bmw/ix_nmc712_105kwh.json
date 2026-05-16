@@ -1,0 +1,458 @@
+{
+  "meta": {
+    "manufacturer_id": "bmw",
+    "manufacturer_name": "BMW Group",
+    "manufacturer_country": "Germany",
+    "model_id": "ix_nmc712_105kwh",
+    "model_name": "iX xDrive50 MY24",
+    "chemistry": "NMC712",
+    "capacity_kwh": 105,
+    "verification_status": "SUSPICIOUS",
+    "overall_score": 38,
+    "trust_score": 52.0,
+    "data_real_pct": 31,
+    "data_mock_pct": 69,
+    "anomaly_flags": [
+      "Carbon value 41.2 kg CO2e/kWh is below NMC712 benchmark minimum (52 kg). Possible underreporting.",
+      "Declared recycled cobalt 18% exceeds 2031 mandatory target of 16% for MY24 — unverifiable claim.",
+      "Voltage x Capacity cross-check: 400V x 262Ah = 104,800 Wh — 0.2% deviation from declared 105 kWh (borderline).",
+      "Supply chain traceability only partially verified — nickel origin unconfirmed by independent auditor."
+    ]
+  },
+
+  "group_a_general": {
+    "label": "General Battery Information",
+    "regulation": "Annex VI Part A",
+    "data_points": {
+      "dp1_manufacturer": {
+        "id": 1, "label": "Manufacturer Identification",
+        "value": "BMW AG, Petuelring 130, 80788 Munich, Germany. Tel: +49 89 382-0 | bmw.com",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-1; Art. 38(7)"
+      },
+      "dp2_battery_model": {
+        "id": 2, "label": "Battery Category & Model",
+        "value": "EV Battery | iX NMC712 105 kWh Traction Battery | Cell Manufacturer: Samsung SDI",
+        "chemistry": "NMC712",
+        "category": "Electric Vehicle Battery",
+        "cell_manufacturer": "Samsung SDI",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-2; Art. 38(6)"
+      },
+      "dp3_place_of_manufacture": {
+        "id": 3, "label": "Place of Manufacture",
+        "cells_location": "Göd, Hungary (Samsung SDI)",
+        "assembly_location": "Dingolfing, Bavaria, Germany (BMW Plant Dingolfing)",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-3"
+      },
+      "dp4_date_of_manufacture": {
+        "id": 4, "label": "Date of Manufacture",
+        "value": "2024 (Model Year MY24)",
+        "year": 2024,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-4"
+      },
+      "dp5_battery_weight": {
+        "id": 5, "label": "Battery Weight",
+        "modules_kg": 450, "complete_system_kg": 605,
+        "unit": "kg",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-5"
+      },
+      "dp6_rated_capacity": {
+        "id": 6, "label": "Rated Capacity",
+        "gross_kwh": 105, "net_kwh": 101.7,
+        "unit": "kWh",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-6"
+      },
+      "dp7_chemical_composition": {
+        "id": 7, "label": "Chemical Composition",
+        "cathode": "NMC712 (Ni70:Mn10:Co20)",
+        "anode": "Graphite with silicon oxide (SiOx) additive",
+        "electrolyte": "Liquid LiPF6 solution",
+        "cell_format": "Prismatic (Samsung SDI Gen5)",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-7"
+      },
+      "dp8_hazardous_substances": {
+        "id": 8, "label": "Hazardous Substances",
+        "substances": [
+          {"name": "LiPF6", "mass_kg": 2.6, "hazard": "corrosive, toxic"},
+          {"name": "Ethylene carbonate", "mass_kg": 3.8, "hazard": "irritant"},
+          {"name": "Cobalt", "mass_kg": 18.2, "hazard": "carcinogenic Cat 1B"},
+          {"name": "Nickel", "mass_kg": 44.1, "hazard": "carcinogenic Cat 1A"},
+          {"name": "Manganese", "mass_kg": 6.3, "hazard": "neurological risk"},
+          {"name": "Lithium", "mass_kg": 6.9, "hazard": "reactive with water"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-8"
+      },
+      "dp9_fire_extinguishing": {
+        "id": 9, "label": "Fire Extinguishing Agent",
+        "primary": "Water (large volume, >= 300 l/min)",
+        "not_suitable": ["CO2", "dry powder"],
+        "min_safe_distance_m": 15,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex VI-A-9"
+      },
+      "dp10_critical_raw_materials": {
+        "id": 10, "label": "Critical Raw Materials",
+        "crm_list": ["Cobalt", "Lithium", "Natural Graphite", "Nickel"],
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Annex VI-A-10"
+      }
+    }
+  },
+
+  "group_b_carbon": {
+    "label": "Carbon Footprint",
+    "regulation": "Art. 7 Para. 1 & 2; Ann. II",
+    "data_points": {
+      "dp11_carbon_total": {
+        "id": 11, "label": "Carbon Footprint — Total Value",
+        "value_kg_co2_per_kwh": 41.2,
+        "total_kg_co2": 4326,
+        "basis_kwh": 105,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(d)",
+        "flag": "SUSPICIOUS — value below NMC712 benchmark minimum of 52 kg CO2e/kWh"
+      },
+      "dp12_carbon_class": {
+        "id": 12, "label": "Carbon Performance Class",
+        "declared_class": "A",
+        "class_boundaries": {"A": [0,40], "B": [40,80], "C": [80,120], "D": [120,999]},
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(2); Annex II-8",
+        "flag": "SUSPICIOUS — declared Class A requires <40 kg CO2e/kWh but declared 41.2 is Class B boundary"
+      },
+      "dp13_carbon_admin": {
+        "id": 13, "label": "Carbon Declaration — Manufacturer Details",
+        "value": "BMW AG, Petuelring 130, Munich. sustainability@bmw.de",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(a)"
+      },
+      "dp14_carbon_model": {
+        "id": 14, "label": "Carbon Declaration — Battery Model",
+        "model": "NMC712 105 kWh Li-ion Traction Battery",
+        "nominal_capacity_ah": 262,
+        "nominal_voltage_v": 400,
+        "application": "BMW iX xDrive50 MY24",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(b)"
+      },
+      "dp15_carbon_location": {
+        "id": 15, "label": "Carbon Declaration — Manufacturing Location",
+        "value": "Dingolfing, Bavaria, Germany",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(c)"
+      },
+      "dp16_carbon_lifecycle": {
+        "id": 16, "label": "Carbon — Lifecycle Breakdown",
+        "phases": {
+          "raw_materials": {"kg_co2": 2100, "pct": 49},
+          "manufacturing": {"kg_co2": 1400, "pct": 32},
+          "distribution": {"kg_co2": 120, "pct": 3},
+          "end_of_life": {"kg_co2": -294, "pct": -7}
+        },
+        "total_kg_co2": 4326,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(e); Annex II-4"
+      },
+      "dp17_carbon_doc_ref": {
+        "id": 17, "label": "Carbon Declaration — DoC Reference",
+        "reference": "BMW-BAT-2024-EU-00312",
+        "notified_body": "DEKRA SE (Ref. 0158)",
+        "date": "2024-02-20",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 7(1)(f)"
+      },
+      "dp18_carbon_web_link": {
+        "id": 18, "label": "Carbon Declaration — Web Link",
+        "url": "https://www.bmw.com/en/innovation/sustainability.html",
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 7(1)(g)"
+      }
+    }
+  },
+
+  "group_c_recycled": {
+    "label": "Recycled Content",
+    "regulation": "Art. 8 Para. 1",
+    "data_points": {
+      "dp19_recycled_cobalt": {
+        "id": 19, "label": "Recycled Content — Cobalt",
+        "current_pct": 18,
+        "target_2031_pct": 16, "target_2036_pct": 26,
+        "source": "Claimed: recycled cobalt from European battery recyclers",
+        "is_primary": false,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 8(1)",
+        "flag": "SUSPICIOUS — 18% recycled cobalt for MY24 exceeds 2031 mandatory minimum. No third-party verification provided."
+      },
+      "dp20_recycled_lithium": {
+        "id": 20, "label": "Recycled Content — Lithium",
+        "current_pct": 4,
+        "target_2031_pct": 6, "target_2036_pct": 12,
+        "source": "Claimed: partially recycled lithium",
+        "is_primary": false,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp21_recycled_nickel": {
+        "id": 21, "label": "Recycled Content — Nickel",
+        "current_pct": 0, "target_2031_pct": 6, "target_2036_pct": 15,
+        "source": "Primary nickel, Indonesia",
+        "is_primary": true,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp22_recycled_lead": {
+        "id": 22, "label": "Recycled Content — Lead",
+        "current_pct": 0, "threshold_pct": 0.004,
+        "labelling_required": false,
+        "status": "REAL", "access_level": 1,
+        "legal_basis": "Art. 8(1)"
+      },
+      "dp23_renewable_energy": {
+        "id": 23, "label": "Share from Renewable Sources",
+        "cell_manufacturing_pct": 65,
+        "pack_assembly_pct": 78,
+        "cell_source": "Samsung SDI Hungary — mixed grid + RECs",
+        "assembly_source": "BMW Dingolfing — 100% green electricity declared",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Annex XIII, point 1(f)"
+      }
+    }
+  },
+
+  "group_d_sourcing": {
+    "label": "Responsible Sourcing",
+    "regulation": "Art. 48-52",
+    "data_points": {
+      "dp24_due_diligence_strategy": {
+        "id": 24, "label": "Due Diligence Strategy",
+        "frameworks": ["OECD Due Diligence Guidance 2018", "BMW Supplier Code of Conduct"],
+        "traceability": "Partial — cobalt only via Minespider blockchain",
+        "certifications": ["RMI (Samsung SDI)"],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 48"
+      },
+      "dp25_due_diligence_report": {
+        "id": 25, "label": "Due Diligence Report",
+        "report": "BMW Group Sustainability Report 2024",
+        "verification": "Partial — internal audit only for nickel",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 52(3)"
+      },
+      "dp26_independent_verification": {
+        "id": 26, "label": "Independent Verification Summary",
+        "verifier": "Minespider (Berlin)",
+        "scope": {
+          "cobalt": "Traceability confirmed",
+          "lithium": "Partial — recycled content claim NOT independently verified",
+          "nickel": "Origin unconfirmed by independent auditor"
+        },
+        "result": "Partial compliance only",
+        "date": "2024-03",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 51",
+        "flag": "Nickel and lithium recycled claims not independently verified"
+      },
+      "dp27_raw_material_description": {
+        "id": 27, "label": "Raw Material Description",
+        "materials": [
+          {"name": "Cobalt", "trade_name": "Cobalt Sulphate CoSO4", "purity": ">=99.5%"},
+          {"name": "Nickel", "trade_name": "Nickel Sulphate NiSO4", "purity": ">=22% Ni"},
+          {"name": "Lithium", "trade_name": "Lithium Hydroxide LiOH", "purity": ">=99.0%"},
+          {"name": "Graphite+SiOx", "trade_name": "Composite anode material", "purity": ">99.5%"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(a)"
+      },
+      "dp28_supplier_names": {
+        "id": 28, "label": "Supplier Names",
+        "suppliers": [
+          {"role": "Cell Production", "name": "Samsung SDI", "location": "Göd, Hungary"},
+          {"role": "Cathode", "name": "Ecopro BM", "location": "Pohang, South Korea"},
+          {"role": "Pack Assembly", "name": "BMW Plant Dingolfing", "location": "Dingolfing, Germany"}
+        ],
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(b)"
+      },
+      "dp29_country_of_origin": {
+        "id": 29, "label": "Country of Origin",
+        "origins": {
+          "cobalt": {"country": "DRC/Philippines", "geopolitical_risk": 7},
+          "nickel": {"country": "Indonesia", "geopolitical_risk": 5},
+          "lithium": {"country": "Australia", "geopolitical_risk": 2},
+          "graphite": {"country": "China", "geopolitical_risk": 6}
+        },
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(c)"
+      },
+      "dp30_raw_material_quantities": {
+        "id": 30, "label": "Raw Material Quantities",
+        "materials": [
+          {"name": "Cobalt", "mass_kg": 18.2, "pct_active": 4.0},
+          {"name": "Nickel", "mass_kg": 44.1, "pct_active": 9.8},
+          {"name": "Manganese", "mass_kg": 6.3, "pct_active": 1.4},
+          {"name": "Lithium", "mass_kg": 6.9, "pct_active": 1.5},
+          {"name": "Graphite+SiOx", "mass_kg": 112.0, "pct_active": 24.9},
+          {"name": "Aluminium", "mass_kg": 26.0, "pct_active": null},
+          {"name": "Steel", "mass_kg": 80.0, "pct_active": null},
+          {"name": "Other", "mass_kg": 156.5, "pct_active": null}
+        ],
+        "total_module_mass_kg": 450,
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(d)"
+      },
+      "dp31_audit_report": {
+        "id": 31, "label": "Independent Supplier Audit Report",
+        "auditor": "Minespider, Berlin",
+        "result": "Cobalt traceable. Nickel and lithium recycled content NOT independently verified.",
+        "date": "2024-03",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(e)"
+      },
+      "dp32_conflict_areas": {
+        "id": 32, "label": "Conflict/High-Risk Areas",
+        "cobalt": {"region": "DRC/Philippines", "asm_involvement": "unknown", "oecd_conformity": "partial"},
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 49(2)(f)"
+      },
+      "dp33_recycled_source_evidence": {
+        "id": 33, "label": "Evidence of Recycled Source",
+        "note": "Cobalt recycled claim: 18%. Evidence: internal certificate only. No third-party verification.",
+        "status": "MOCK", "access_level": 1,
+        "legal_basis": "Art. 52(4)",
+        "flag": "Recycled content claim lacks independent verification"
+      }
+    }
+  },
+
+  "group_e_electrical": {
+    "label": "Electrical Characteristics",
+    "regulation": "Ann. XIII No. 1 g-p",
+    "data_points": {
+      "dp34_rated_capacity_ah": {"id": 34, "label": "Rated Capacity", "value_ah": 262, "usable_kwh": 101.7, "status": "REAL", "access_level": 1, "legal_basis": "Annex XIII, point 1(g)"},
+      "dp35_min_voltage": {"id": 35, "label": "Minimum Voltage", "value_v": 260, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(h)"},
+      "dp36_nominal_voltage": {"id": 36, "label": "Nominal Voltage", "value_v": 400, "status": "REAL", "access_level": 1, "legal_basis": "Annex XIII, point 1(h)"},
+      "dp37_max_voltage": {"id": 37, "label": "Maximum Voltage", "value_v": 418, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(h)"},
+      "dp38_power_capability": {"id": 38, "label": "Power Capability", "peak_discharge_kw": 385, "dc_charging_kw": 195, "ac_charging_kw_3phase": 22, "status": "REAL", "access_level": 1, "legal_basis": "Annex XIII, point 1(i)"},
+      "dp39_power_limits": {"id": 39, "label": "Power Limits", "max_discharge_kw": 385, "continuous_kw": 200, "max_dc_charging_kw": 195, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(i)"},
+      "dp40_expected_lifetime": {"id": 40, "label": "Expected Lifetime", "cycles_to_70pct_soh": 1200, "warranty_years": 8, "warranty_km": 160000, "status": "REAL", "access_level": 1, "legal_basis": "Annex XIII, point 1(j)"},
+      "dp41_capacity_threshold": {"id": 41, "label": "Capacity Threshold", "soh_threshold_pct": 70, "threshold_kwh": 73.5, "status": "REAL", "access_level": 1, "legal_basis": "Annex XIII, point 1(k)"},
+      "dp42_storage_temperature": {"id": 42, "label": "Storage Temperature", "min_c": -40, "max_c": 60, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(l)"},
+      "dp43_warranty_calendar": {"id": 43, "label": "Warranty", "years": 8, "km": 160000, "soh_threshold_pct": 70, "status": "REAL", "access_level": 1, "legal_basis": "Annex XIII, point 1(m)"},
+      "dp44_rtw_initial": {"id": 44, "label": "RTW Efficiency Initial", "value_pct": 94.1, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(n)"},
+      "dp45_rtw_50pct": {"id": 45, "label": "RTW After 50% Cycles", "value_pct": 90.2, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(n)"},
+      "dp46_internal_resistance_cell": {"id": 46, "label": "Cell Resistance", "value_mohm": 1.1, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(o)"},
+      "dp47_internal_resistance_pack": {"id": 47, "label": "Pack Resistance", "value_mohm": 38.2, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(o)"},
+      "dp48_c_rate": {"id": 48, "label": "C-Rate Test", "charge_c": 0.33, "discharge_c": 0.33, "status": "MOCK", "access_level": 1, "legal_basis": "Annex XIII, point 1(p)"}
+    }
+  },
+
+  "group_f_conformity": {
+    "label": "Conformity & Labelling",
+    "data_points": {
+      "dp49_eu_doc": {"id": 49, "label": "EU DoC", "issued_by": "BMW AG", "status": "REAL", "access_level": 1, "legal_basis": "Art. 18"},
+      "dp50_doc_reference": {"id": 50, "label": "DoC Reference", "reference": "BMW-BAT-2024-EU-00312", "notified_body": "DEKRA SE", "notified_body_ref": "0158", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 7(1)(f)"},
+      "dp51_ce_marking": {"id": 51, "label": "CE Marking", "affixed": true, "notified_body_ref": "0158", "status": "REAL", "access_level": 1, "legal_basis": "Art. 19"},
+      "dp52_labelling": {"id": 52, "label": "Labelling", "separate_collection_symbol": true, "capacity_label": "105 kWh", "qr_code": true, "status": "REAL", "access_level": 1, "legal_basis": "Art. 13"},
+      "dp53_cadmium_marking": {"id": 53, "label": "Cd Marking", "cd_pct": 0.0, "labelling_required": false, "status": "REAL", "access_level": 1, "legal_basis": "Art. 13(5)"},
+      "dp54_lead_marking": {"id": 54, "label": "Pb Marking", "pb_pct": 0.0, "labelling_required": false, "status": "REAL", "access_level": 1, "legal_basis": "Art. 13(5)"},
+      "dp55_waste_usage": {"id": 55, "label": "Usage Recommendations", "daily_charge_range": "20-80% SoC", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(a)"},
+      "dp56_waste_collection": {"id": 56, "label": "Separate Collection", "scheme": "BMW dealer network EU", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(b)"},
+      "dp57_waste_takeback": {"id": 57, "label": "Take-Back Facilities", "dealer_points_eu": 1800, "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(c)"},
+      "dp58_waste_safety": {"id": 58, "label": "Waste Safety", "transport_class": "ADR Class 9", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(d)"},
+      "dp59_waste_labels": {"id": 59, "label": "Label Meanings", "labels": ["CE mark", "Separate collection", "105 kWh", "QR code", "HV warning"], "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(e)"},
+      "dp60_waste_substance_impacts": {"id": 60, "label": "Substance Impacts", "note": "Similar to NMC811 — cobalt and nickel primary hazards", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 74(1)(f)"}
+    }
+  },
+
+  "group_g_composition": {
+    "label": "Composition & Disassembly",
+    "data_points": {
+      "dp61_cathode_detail": {"id": 61, "label": "Cathode Detail", "material": "NMC712 (LiNi0.7Mn0.1Co0.2O2)", "status": "REAL", "access_level": 2, "legal_basis": "Annex XIII, point 2(a)"},
+      "dp62_anode_detail": {"id": 62, "label": "Anode Detail", "material": "Graphite + SiOx (5% silicon oxide additive)", "status": "REAL", "access_level": 2, "legal_basis": "Annex XIII, point 2(a)"},
+      "dp63_electrolyte_detail": {"id": 63, "label": "Electrolyte Detail", "salt": "LiPF6 1.2 mol/L", "solvents": ["EC 20%", "DMC 35%", "EMC 45%"], "total_mass_kg": 13.5, "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(a)"},
+      "dp64_part_numbers": {"id": 64, "label": "Part Numbers", "parts": [{"component": "Battery pack", "part_number": "61217732850"}, {"component": "BMS", "part_number": "61357490321"}], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(b)"},
+      "dp65_spare_parts_contacts": {"id": 65, "label": "Spare Parts Contacts", "suppliers": [{"name": "BMW AG Parts", "portal": "bmwparts.com"}], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(b)"},
+      "dp66_disassembly_diagrams": {"id": 66, "label": "Disassembly Diagrams", "available_via": "BMW ISTA Workshop System", "battery_position": "Underfloor (CLAR platform)", "status": "REAL", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp67_disassembly_steps": {"id": 67, "label": "Disassembly Steps", "steps": ["1. Disconnect 12V. 2. Pull safety switch. 3. Wait 5 min. 4. Disconnect coolant. 5. Remove underguard. 6. Lower battery (24x M12)."], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp68_joining_techniques": {"id": 68, "label": "Joining Techniques", "mechanical": [{"connection": "Pack to vehicle", "fastener": "24x M12", "torque_nm": 85}], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp69_required_tools": {"id": 69, "label": "Required Tools", "safety": ["HV gloves Class 0", "HV visor"], "special": ["BMW Special Tool 83302212497"], "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp70_damage_warnings": {"id": 70, "label": "Damage Warnings", "danger_to_life": "400V DC system. Always use insulated tools.", "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp71_cell_count": {"id": 71, "label": "Cell Count", "modules": 12, "cells_per_module": 18, "total_cells": 216, "arrangement": "3P6S per module", "cell_capacity_ah": 100, "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(c)"},
+      "dp72_safety_measures": {"id": 72, "label": "Safety Measures", "active_bms": {"cell_voltage_sensors": 216, "temperature_sensors": 96, "monitoring_interval_ms": 10}, "status": "MOCK", "access_level": 2, "legal_basis": "Annex XIII, point 2(d)"}
+    }
+  },
+
+  "group_h_authority": {
+    "label": "Authority Information",
+    "data_points": {
+      "dp73_test_reports": {"id": 73, "label": "Test Reports", "testing_institute": "DEKRA SE (Ref. 0158)", "report_number": "DK-BAT-2024-00312", "results": {"safety": "PASS", "electrical": "PASS", "carbon_iso14067": "PASS — 41.2 kg CO2e/kWh declared", "due_diligence": "PARTIAL — nickel unverified"}, "status": "MOCK", "access_level": 3, "legal_basis": "Annex XIII, point 3"},
+      "dp74_ce_notified_body_ref": {"id": 74, "label": "CE Notified Body", "notified_body": "DEKRA SE", "reference_number": "0158", "status": "MOCK", "access_level": 3, "legal_basis": "Art. 20(3)"}
+    }
+  },
+
+  "group_i_individual_performance": {
+    "label": "Individual Performance",
+    "data_points": {
+      "dp75_current_capacity": {"id": 75, "label": "Current Capacity", "rated_ah": 262, "usable_kwh": 101.7, "capacity_loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp76_current_power": {"id": 76, "label": "Current Power", "peak_power_w": 385000, "power_loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp77_current_resistance": {"id": 77, "label": "Current Resistance", "pack_resistance_mohm": 38.2, "resistance_increase_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp78_rtw_current": {"id": 78, "label": "Current RTW", "value_pct": 94.1, "rtw_loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4a"},
+      "dp79_remaining_lifetime": {"id": 79, "label": "Remaining Lifetime", "cycles_remaining": 1200, "calendar_years": 15, "warranty_years": 8, "status": "REAL", "access_level": 4, "legal_basis": "Annex XIII-4a"}
+    }
+  },
+
+  "group_j_soh": {
+    "label": "State of Health",
+    "data_points": {
+      "dp80_soce": {"id": 80, "label": "SOCE", "value_kwh": 105.0, "pct_of_rated": 100.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp81_remaining_capacity": {"id": 81, "label": "Remaining Capacity", "value_kwh": 101.7, "pct_of_rated": 100.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp82_remaining_power": {"id": 82, "label": "Remaining Power", "value_kw": 385.0, "pct_of_rated": 100.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp83_remaining_rtw": {"id": 83, "label": "Remaining RTW", "value_pct": 94.1, "loss_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp84_self_discharge": {"id": 84, "label": "Self Discharge", "value_pct_per_month": 1.6, "normal_range": [1.5, 2.5], "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp85_ohmic_resistance": {"id": 85, "label": "Ohmic Resistance", "value_mohm": 38.2, "increase_pct": 0.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"}
+    }
+  },
+
+  "group_k_lifetime": {
+    "label": "Expected Lifetime",
+    "data_points": {
+      "dp86_manufacture_commissioning": {"id": 86, "label": "Manufacture Date", "manufacture_year": 2024, "status": "REAL", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp87_energy_throughput": {"id": 87, "label": "Energy Throughput", "current_kwh": 0, "reference_eol_kwh": 182000, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp88_capacity_throughput": {"id": 88, "label": "Capacity Throughput", "current_ah": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp89_deep_discharges": {"id": 89, "label": "Deep Discharges", "count": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp90_extreme_temperatures": {"id": 90, "label": "Extreme Temperatures", "hours_above_55c": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"},
+      "dp91_full_cycles": {"id": 91, "label": "Full Cycles (FEC)", "current_fec": 0.0, "expected_fec_to_eol": 2000, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII-4b"}
+    }
+  },
+
+  "group_l_operational": {
+    "label": "Operational Data",
+    "data_points": {
+      "dp92_battery_status": {"id": 92, "label": "Battery Status", "status_value": "unchanged", "status": "REAL", "access_level": 4, "legal_basis": "Annex XIII-4c"},
+      "dp93_charge_cycles": {"id": 93, "label": "Charge Cycles", "charge_cycles": 0, "discharge_cycles": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"},
+      "dp94_negative_events": {"id": 94, "label": "Negative Events", "accidents": 0, "thermal_runaway": 0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"},
+      "dp95_operating_temperature": {"id": 95, "label": "Operating Temperature", "min_cell_c": 14.0, "max_cell_c": 36.0, "avg_cell_c": 22.5, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"},
+      "dp96_state_of_charge": {"id": 96, "label": "State of Charge", "current_soc_pct": 75.0, "delivery_soc_pct": 80.0, "status": "MOCK", "access_level": 4, "legal_basis": "Annex XIII, point 4(d)"}
+    }
+  },
+
+  "group_m_metadata": {
+    "label": "Identification & Metadata",
+    "data_points": {
+      "dp97_unique_identifier": {"id": 97, "label": "Unique Identifier", "format": "ISO/IEC 15459-1:2014", "example": "BAT-BMW-IX-2024-[unique]", "status": "REAL", "access_level": 1, "legal_basis": "Art. 77(3)"},
+      "dp98_qr_code": {"id": 98, "label": "QR Code", "affixed": true, "location": "B-pillar", "status": "REAL", "access_level": 1, "legal_basis": "Art. 13(6)"},
+      "dp99_operating_instructions": {"id": 99, "label": "Operating Instructions", "manual_url": "bmw.com/owners", "status": "MOCK", "access_level": 1, "legal_basis": "Art. 38(1)(a)"},
+      "dp100_second_life_link": {"id": 100, "label": "Second Life Link", "applicable": false, "status": "REAL", "access_level": 1, "legal_basis": "Art. 77(7)"},
+      "dp101_standards": {"id": 101, "label": "Applied Standards", "standards": ["ISO 14067:2018", "IEC 62660-1:2018", "IEC 62133-2:2017", "UN 38.3", "UNECE GTR No. 22"], "status": "REAL", "access_level": 3, "legal_basis": "Annex VIII point (e)"},
+      "dp102_technical_description": {"id": 102, "label": "Technical Description", "designation": "iX NMC712 105 kWh Li-ion Traction Battery", "category": "EV Battery", "total_cells": 216, "total_modules": 12, "status": "REAL", "access_level": 3, "legal_basis": "Annex VIII point (a)"}
+    }
+  }
+}
