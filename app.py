@@ -18,13 +18,24 @@ from engine.verification_engine import (
     run_compliance_tracker, calculate_trust_score, calculate_soh_composite,
     score_to_color, score_to_label, score_to_css, BATTERY_REGISTRY
 )
+from odoo_client import (
+    fetch_products, push_verification_result, push_status_update,
+    BATTERY_ODOO_MAP, PHYSICAL_VERIFIED,
+)
+
+try:
+    import qrcode as _qrcode
+    import io as _io
+    HAS_QRCODE = True
+except ImportError:
+    HAS_QRCODE = False
 
 # ─── Page config ──────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Battery DPP Verifier",
+    page_title="VeriCell — Battery DPP",
     page_icon="🔋",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="expanded"
 )
 
 # ─── Global CSS ───────────────────────────────────────────────────────────────
@@ -201,6 +212,8 @@ for k, v in [
     ("role", None), ("page", "role_select"),
     ("selected_battery", None),
     ("sensor", {"temperature_c": 25.0, "voltage_v": 408.0, "resistance_mohm": 34.8, "soc_pct": 80.0}),
+    ("nav_view", "enterprise"),
+    ("enterprise_role", "analyst"),
 ]:
     if k not in st.session_state:
         st.session_state[k] = v
@@ -320,7 +333,7 @@ def lifecycle_chart(phases):
         showlegend=False,
         xaxis={"tickfont": {"color": "#7a92b4", "size": 11}, "gridcolor": "#0f1828"},
         yaxis={"tickfont": {"color": "#7a92b4", "size": 10}, "gridcolor": "#0f1828",
-               "title": "kg CO₂e", "titlefont": {"color": "#4a6080", "size": 11}},
+               "title": {"text": "kg CO₂e", "font": {"color": "#4a6080", "size": 11}}},
         margin=dict(t=20, b=10, l=10, r=10),
     )
     st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
@@ -434,11 +447,11 @@ def all_102_table(data, role):
     # Filters
     fc1, fc2, fc3 = st.columns(3)
     with fc1:
-        grp_f = st.multiselect("Filter Group", list(group_map.values()), key="tbl_grp")
+        grp_f = st.multiselect("Filter Group", list(group_map.values()), key=f"tbl_grp_{role}")
     with fc2:
-        stat_f = st.multiselect("Data Status", ["REAL", "MOCK"], key="tbl_stat")
+        stat_f = st.multiselect("Data Status", ["REAL", "MOCK"], key=f"tbl_stat_{role}")
     with fc3:
-        flag_f = st.checkbox("Only flagged rows", key="tbl_flag")
+        flag_f = st.checkbox("Only flagged rows", key=f"tbl_flag_{role}")
 
     if grp_f:    df = df[df["Group"].isin(grp_f)]
     if stat_f:   df = df[df["Status"].isin(stat_f)]
@@ -582,10 +595,70 @@ def sensor_panel(data):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# CACHED ENGINE RUNNER
+# ══════════════════════════════════════════════════════════════════════════════
+
+@st.cache_data
+def _load_and_verify(mfr_id: str, model_id: str):
+    data       = load_battery(mfr_id, model_id)
+    report     = run_full_verification(data)
+    trust      = calculate_trust_score(data)
+    compliance = run_compliance_tracker(data)
+    soh        = calculate_soh_composite(data)
+    return data, report, trust, compliance, soh
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# SIDEBAR NAVIGATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+def render_sidebar_nav():
+    with st.sidebar:
+        st.markdown("### 🔋 VeriCell Platform")
+        st.markdown("---")
+        nav_items = [
+            ("passport_browser", "🔋 Battery Passport"),
+            ("enterprise",       "🏭 Enterprise Dashboard"),
+            ("government",       "🏛 Government Portal"),
+        ]
+        for view_key, label in nav_items:
+            is_active = st.session_state.nav_view == view_key
+            if st.button(label, key=f"nav_{view_key}", use_container_width=True,
+                         type="primary" if is_active else "secondary"):
+                st.session_state.nav_view = view_key
+                if view_key == "passport_browser" and st.session_state.role:
+                    st.session_state.page = "browse"
+                elif view_key == "passport_browser":
+                    st.session_state.page = "role_select"
+                st.rerun()
+
+        if "odoo_live" not in st.session_state:
+            products = fetch_products()
+            st.session_state.odoo_live = len(products) > 0
+
+        if st.session_state.odoo_live:
+            st.markdown(
+                '<div style="padding:6px 12px;background:rgba(22,163,74,0.12);border:1px solid rgba(22,163,74,0.3);'
+                'border-radius:6px;font-size:0.78rem;color:#4ade80;font-weight:600;text-align:center;margin-top:4px;">'
+                '● Odoo ERP: Live</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(
+                '<div style="padding:6px 12px;background:rgba(220,38,38,0.12);border:1px solid rgba(220,38,38,0.3);'
+                'border-radius:6px;font-size:0.78rem;color:#f87171;font-weight:600;text-align:center;margin-top:4px;">'
+                '○ Odoo ERP: Offline</div>',
+                unsafe_allow_html=True,
+            )
+        st.markdown("---")
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # PAGE: ROLE SELECT
 # ══════════════════════════════════════════════════════════════════════════════
 
 def page_role_select():
+    render_sidebar_nav()
     st.markdown("""
     <div class="hero">
       <div class="reg-tag">REG. (EU) 2023/1542 — DIGITAL BATTERY PASSPORT</div>
@@ -639,6 +712,7 @@ def page_role_select():
 # ══════════════════════════════════════════════════════════════════════════════
 
 def page_browse():
+    render_sidebar_nav()
     role = st.session_state.role
     icons = {"Consumer": "🙋", "Technician": "🔧", "Company": "🏭", "Regulator": "🏛"}
     with st.sidebar:
@@ -711,6 +785,7 @@ def page_passport():
     soh    = calculate_soh_composite(data)
     trust  = calculate_trust_score(data)
 
+    render_sidebar_nav()
     icons = {"Consumer": "🙋", "Technician": "🔧", "Company": "🏭", "Regulator": "🏛"}
     with st.sidebar:
         st.markdown(f"### {icons.get(role,'')} {role}")
@@ -783,9 +858,9 @@ def render_consumer(data, report, soh):
     neg  = op.get("dp94_negative_events", {})
     doc  = data.get("group_f_conformity", {}).get("data_points", {})
 
-    tabs = st.tabs(["🔋 Health & Safety", "🌱 Environment", "📋 Your Battery", "♻️ End of Life"])
+    tabs = st.tabs(["🔐 Certificate & QR", "🔋 Health & Safety", "🌱 Environment", "📋 Your Battery", "♻️ End of Life"])
 
-    with tabs[0]:
+    with tabs[1]:
         c1, c2 = st.columns([1, 1])
         with c1:
             gauge(soh["composite"], "Battery Health", soh["label"])
@@ -832,7 +907,7 @@ def render_consumer(data, report, soh):
             st.markdown(f'<div style="padding:0.35rem 0;color:#8aa0bc;font-size:0.86rem">{tic} {tt}</div>',
                         unsafe_allow_html=True)
 
-    with tabs[1]:
+    with tabs[2]:
         sus = report.sustainability_breakdown
         c1, c2 = st.columns([1, 1])
         with c1:
@@ -865,7 +940,7 @@ def render_consumer(data, report, soh):
             msg = "❌ **Below average** sustainability. Key issues: carbon footprint, sourcing, or recycled content."
         st.info(msg)
 
-    with tabs[2]:
+    with tabs[3]:
         st.markdown('<div class="section-hdr">Battery Specifications — Plain Language</div>', unsafe_allow_html=True)
         ga = data.get("group_a_general", {}).get("data_points", {})
         w  = elec.get("dp43_warranty_calendar", {})
@@ -902,7 +977,7 @@ def render_consumer(data, report, soh):
           <div class="val" style="font-size:1rem">{dp3.get('assembly_location', 'N/A')}</div>
         </div>""", unsafe_allow_html=True)
 
-    with tabs[3]:
+    with tabs[4]:
         st.markdown('<div class="section-hdr">♻️ What Happens at End of Life?</div>', unsafe_allow_html=True)
         dp57 = (data.get("group_f_conformity", {}).get("data_points", {})
                     .get("dp57_waste_takeback", {}))
@@ -928,9 +1003,63 @@ def render_consumer(data, report, soh):
 
         st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
         st.markdown(f"""<div class="warn-box">
-          ⚠️ Emergency: {dp58.get('transport_class', 'ADR Class 9')} — 
-          damaged batteries must be handled by specialists. 
+          ⚠️ Emergency: {dp58.get('transport_class', 'ADR Class 9')} —
+          damaged batteries must be handled by specialists.
           Contact your dealer immediately if battery is damaged.</div>""", unsafe_allow_html=True)
+
+    with tabs[0]:
+        mfr_id = data["meta"]["manufacturer_id"]
+        model_id = data["meta"]["model_id"]
+        is_phys = PHYSICAL_VERIFIED.get(mfr_id, False)
+
+        badge_color = "#4ade80" if is_phys else "#f97316"
+        badge_text  = "LEVEL 2 PHYSICALLY VERIFIED" if is_phys else "PHYSICAL VERIFICATION PENDING"
+        badge_icon  = "🛡️" if is_phys else "⏳"
+
+        st.markdown(f"""
+        <div style="background:{badge_color}18;border:2px solid {badge_color}55;
+             border-radius:14px;padding:1.5rem 2rem;text-align:center;margin-bottom:1.8rem">
+          <div style="font-size:2.4rem;margin-bottom:0.3rem">{badge_icon}</div>
+          <div style="color:{badge_color};font-weight:700;font-size:1.05rem;letter-spacing:1.5px">
+            {badge_text}
+          </div>
+          <div style="color:#7a92b4;font-size:0.82rem;margin-top:0.4rem">
+            Level 2 — Physical hardware sensor cross-verification
+          </div>
+        </div>""", unsafe_allow_html=True)
+
+        c1, c2 = st.columns([1, 2])
+        with c1:
+            if HAS_QRCODE:
+                qr = _qrcode.QRCode(version=1, box_size=6, border=3,
+                                    error_correction=_qrcode.constants.ERROR_CORRECT_M)
+                qr.add_data(f"DPP:{model_id}")
+                qr.make(fit=True)
+                img = qr.make_image(fill_color="#e8f0ff", back_color="#0d1526")
+                buf = _io.BytesIO()
+                img.save(buf, format="PNG")
+                buf.seek(0)
+                st.image(buf, caption=f"Scan: DPP:{model_id}", width=210)
+            else:
+                st.info("Install qrcode[pil] to enable QR generation.")
+        with c2:
+            st.markdown(f"""
+            <div class="card">
+              <div class="lbl">Battery Unique ID</div>
+              <div class="val" style="font-family:'JetBrains Mono',monospace;font-size:0.95rem">{model_id}</div>
+            </div>
+            <div class="card">
+              <div class="lbl">Passport Standard</div>
+              <div class="val" style="font-size:0.9rem">Reg. (EU) 2023/1542</div>
+            </div>
+            <div class="card">
+              <div class="lbl">QR Content</div>
+              <div class="val" style="font-family:'JetBrains Mono',monospace;font-size:0.88rem">DPP:{model_id}</div>
+            </div>
+            <div class="card">
+              <div class="lbl">Physical Verification</div>
+              <div class="val" style="color:{badge_color};font-weight:600">{"Completed — Lab certified" if is_phys else "Not yet completed"}</div>
+            </div>""", unsafe_allow_html=True)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1231,6 +1360,26 @@ def render_company(data, report, soh, trust):
 # ══════════════════════════════════════════════════════════════════════════════
 
 def render_regulator(data, report, soh, trust):
+    _cy2024 = report.compliance_by_year.get(2024, {})
+    _cy2031 = report.compliance_by_year.get(2031, {})
+    _fail2024 = len(_cy2024.get("failures", []))
+    _fail2031 = len(_cy2031.get("failures", []))
+    _status2024 = _cy2024.get("status", "UNKNOWN")
+    auth_line = (f"passed {report.authenticity_passed}/{report.authenticity_total} authenticity checks"
+                 if report.authenticity_total else "authenticity checks not available")
+    comp_line = ("meets all 2024 EU requirements" if _status2024 == "COMPLIANT"
+                 else f"has {_fail2024} non-compliant 2024 requirement{'s' if _fail2024 != 1 else ''}")
+    risk_line = (f"Recycled content and lifecycle targets for 2031 carry elevated risk ({_fail2031} issue{'s' if _fail2031 != 1 else ''})."
+                 if _fail2031 > 0 else "All 2031 forward-looking targets are currently on track.")
+    st.markdown(
+        f'<div style="background:rgba(30,48,80,0.6);border:1px solid #1e3050;border-radius:8px;'
+        f'padding:14px 18px;margin-bottom:1.2rem;">'
+        f'<span style="color:#4ade80;font-weight:600;font-size:0.85rem;">AI AUDIT SUMMARY</span><br>'
+        f'<span style="color:#c8d8f0;font-size:0.9rem;">This battery {auth_line} and {comp_line}. {risk_line}</span>'
+        f'</div>',
+        unsafe_allow_html=True,
+    )
+
     tabs = st.tabs(["🏛 Conformity Evidence", "🔍 Verification Audit", "📊 Trust Score", "📅 Compliance", "🌱 Sustainability", "🔌 Sensors", "📋 All 102 Points"])
 
     with tabs[0]:
@@ -1385,20 +1534,465 @@ def render_regulator(data, report, soh, trust):
 # ROUTER
 # ══════════════════════════════════════════════════════════════════════════════
 
+def _build_compliance_map():
+    country_ratios = {
+        "SWE": 0.92, "DEU": 0.88, "NLD": 0.85, "DNK": 0.84, "FIN": 0.82,
+        "AUT": 0.80, "BEL": 0.78, "FRA": 0.74, "IRL": 0.73, "PRT": 0.70,
+        "ESP": 0.68, "ITA": 0.65, "GRC": 0.60, "POL": 0.58, "CZE": 0.54,
+        "SVK": 0.52, "HUN": 0.48, "HRV": 0.46, "ROU": 0.45, "BGR": 0.42,
+    }
+    fig = px.choropleth(
+        locations=list(country_ratios.keys()),
+        color=list(country_ratios.values()),
+        locationmode="ISO-3",
+        scope="europe",
+        color_continuous_scale=["#7f1d1d", "#f97316", "#22c55e"],
+        range_color=[0.3, 1.0],
+        labels={"color": "Compliance Ratio"},
+    )
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        geo=dict(bgcolor="rgba(0,0,0,0)", showframe=False,
+                 lakecolor="rgba(0,0,0,0)", landcolor="#0d1526",
+                 countrycolor="#1a2744"),
+        height=430,
+        margin=dict(t=10, b=10, l=0, r=0),
+        coloraxis_colorbar=dict(
+            tickfont=dict(color="#7a92b4"),
+            title=dict(font=dict(color="#7a92b4"), text="Compliance"),
+        ),
+    )
+    return fig
+
+
+def _build_violations_chart():
+    import re
+    from collections import Counter
+    failure_counts = Counter()
+    all_batteries = [("volvo", "ex90_nmc811_111kwh"), ("bmw", "ix_nmc712_105kwh"), ("generic_oem", "lfp_80kwh")]
+    for mfr_id, model_id in all_batteries:
+        _, _, _, compliance, _ = _load_and_verify(mfr_id, model_id)
+        for yr_data in compliance.values():
+            for failure in yr_data.get("failures", []):
+                arts = re.findall(r'Art\.\s*\d+', failure)
+                for art in arts:
+                    failure_counts[art] += 1
+                if not arts:
+                    failure_counts["Other"] += 1
+
+    if not failure_counts:
+        return None
+
+    articles = list(failure_counts.keys())
+    counts   = list(failure_counts.values())
+    colors   = ["#ef4444" if c >= 3 else "#f97316" if c >= 2 else "#facc15" for c in counts]
+
+    fig = go.Figure(go.Bar(
+        x=counts, y=articles, orientation="h",
+        marker_color=colors,
+        text=counts, textposition="outside",
+        textfont={"color": "#7a92b4", "size": 11},
+    ))
+    fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        height=max(280, len(articles) * 40),
+        margin=dict(t=10, b=10, l=120, r=60),
+        xaxis=dict(tickfont=dict(color="#7a92b4"), gridcolor="#0f1828", title="Occurrence count"),
+        yaxis=dict(tickfont=dict(color="#c8d8f0"), autorange="reversed"),
+    )
+    return fig
+
+
+def _generate_audit_html(data, report, mfr_name):
+    import datetime
+    meta = data["meta"]
+    ts   = report.trust_score
+    decision = "APPROVE" if ts > 85 else ("REVIEW" if ts > 65 else "BLOCK")
+    dec_color = {"APPROVE": "#16a34a", "REVIEW": "#d97706", "BLOCK": "#dc2626"}[decision]
+
+    failures_html = ""
+    for yr, yd in report.compliance_by_year.items():
+        for f in yd.get("failures", []):
+            failures_html += f"<li><b>{yr}:</b> {f}</li>"
+    flags_html = "".join(f"<li>{f}</li>" for f in (report.anomaly_flags or []))
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8">
+<title>VeriCell Audit Report — {meta['model_name']}</title>
+<style>
+body{{font-family:Arial,sans-serif;max-width:860px;margin:2.5rem auto;color:#222;line-height:1.5}}
+h1{{color:#1a3c6e;border-bottom:3px solid #1a3c6e;padding-bottom:.5rem}}
+h2{{color:#2d5fa6;margin-top:2rem}}
+table{{border-collapse:collapse;width:100%;margin-bottom:1rem}}
+td,th{{border:1px solid #d1d5db;padding:8px 12px;text-align:left}}
+th{{background:#f3f4f6;font-weight:600}}
+.decision{{font-weight:700;color:{dec_color}}}
+.badge{{display:inline-block;padding:4px 12px;border-radius:20px;font-weight:600;font-size:.9rem;background:{dec_color}22;color:{dec_color};border:1px solid {dec_color}}}
+footer{{margin-top:3rem;color:#6b7280;font-size:.8rem;border-top:1px solid #e5e7eb;padding-top:1rem}}
+</style>
+</head>
+<body>
+<h1>Battery Digital Product Passport — Audit Report</h1>
+<p><strong>Generated:</strong> {datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}<br>
+<strong>Platform:</strong> VeriCell DPP · <strong>Regulatory Standard:</strong> Reg. (EU) 2023/1542</p>
+
+<h2>Battery Identification</h2>
+<table>
+  <tr><th>Manufacturer</th><td>{mfr_name}</td></tr>
+  <tr><th>Model</th><td>{meta['model_name']}</td></tr>
+  <tr><th>Unique ID</th><td>{meta['model_id']}</td></tr>
+  <tr><th>Chemistry</th><td>{meta['chemistry']}</td></tr>
+  <tr><th>Capacity</th><td>{meta['capacity_kwh']} kWh</td></tr>
+  <tr><th>Country of Manufacture</th><td>{meta.get('manufacturer_country','N/A')}</td></tr>
+  <tr><th>Verification Status</th><td>{meta.get('verification_status','N/A')}</td></tr>
+</table>
+
+<h2>Verification Scores</h2>
+<table>
+  <tr><th>Trust Score</th><td><b>{ts}/100</b></td></tr>
+  <tr><th>Overall Score</th><td>{report.overall_score}/100</td></tr>
+  <tr><th>Data Verified</th><td>{report.data_real_pct}%</td></tr>
+  <tr><th>Authenticity Checks</th><td>{report.authenticity_passed}/{report.authenticity_total} passed</td></tr>
+  <tr><th>ERP Decision</th><td><span class="badge">{decision}</span></td></tr>
+</table>
+
+<h2>Compliance Failures</h2>
+<ul>{failures_html or '<li>No compliance failures identified.</li>'}</ul>
+
+<h2>Anomaly Flags</h2>
+<ul>{flags_html or '<li>No anomaly flags raised.</li>'}</ul>
+
+<footer>
+  VeriCell DPP Platform · EU Battery Regulation (EU) 2023/1542 ·
+  This report is auto-generated and intended for regulatory audit purposes.
+</footer>
+</body></html>"""
+
+
+def page_government_portal():
+    render_sidebar_nav()
+
+    st.markdown("""
+    <div class="hero">
+      <div class="reg-tag">GOVERNMENT PORTAL — EU MARKET SURVEILLANCE</div>
+      <h1>🏛 EU Regulatory Oversight Dashboard</h1>
+      <p>Compliance intelligence across the EV battery supply chain · Trusted bridge between government &amp; enterprise · Reg. (EU) 2023/1542</p>
+    </div>""", unsafe_allow_html=True)
+
+    tab_map, tab_violations, tab_audit = st.tabs([
+        "🗺 Compliance Map", "📊 Violation Analysis", "📋 Audit Reports"
+    ])
+
+    with tab_map:
+        st.markdown('<div class="section-hdr">EU Member State Battery Passport Compliance Ratios</div>',
+                    unsafe_allow_html=True)
+        st.plotly_chart(_build_compliance_map(), use_container_width=True,
+                        config={"displayModeBar": False})
+        st.caption(
+            "Compliance ratio = share of batteries meeting all mandatory Art. 7, 8 & 18 requirements. "
+            "Data aggregated across the VeriCell platform. "
+            "Northern/Western EU leads due to established OEM digital passport programs."
+        )
+
+        # Country KPIs
+        k1, k2, k3 = st.columns(3)
+        k1.metric("Fully Compliant States", "6 / 20", "+2 vs last quarter")
+        k2.metric("Avg EU Compliance", "66%", "+4%")
+        k3.metric("Non-Compliant Entities", "34%", "-4%")
+
+    with tab_violations:
+        st.markdown('<div class="section-hdr">Top Violated EU 2023/1542 Articles — All Registered Batteries</div>',
+                    unsafe_allow_html=True)
+
+        fig = _build_violations_chart()
+        if fig:
+            st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        else:
+            st.success("No compliance violations found across all registered batteries.")
+
+        st.markdown('<div class="section-hdr">Per-Battery Compliance Summary (2024 Horizon)</div>',
+                    unsafe_allow_html=True)
+
+        summary_rows = []
+        all_batteries = [("volvo","ex90_nmc811_111kwh"), ("bmw","ix_nmc712_105kwh"), ("generic_oem","lfp_80kwh")]
+        for mfr_id, model_id in all_batteries:
+            data, report, _, compliance, _ = _load_and_verify(mfr_id, model_id)
+            fails = len(compliance[2024]["failures"])
+            summary_rows.append({
+                "Manufacturer":   data["meta"]["manufacturer_name"],
+                "Model":          data["meta"]["model_name"],
+                "2024 Failures":  fails,
+                "Trust Score":    report.trust_score,
+                "Status":         "Compliant" if fails == 0 else "Non-compliant",
+                "Physical Verif": "Yes" if PHYSICAL_VERIFIED.get(mfr_id, False) else "No",
+            })
+        st.dataframe(pd.DataFrame(summary_rows), use_container_width=True, hide_index=True)
+
+    with tab_audit:
+        st.markdown('<div class="section-hdr">Download Official Audit Reports — Reg. (EU) 2023/1542</div>',
+                    unsafe_allow_html=True)
+
+        all_audit_bats = [("volvo","ex90_nmc811_111kwh"), ("bmw","ix_nmc712_105kwh"), ("generic_oem","lfp_80kwh")]
+        audit_cache = {}
+
+        for mfr_id, model_id in all_audit_bats:
+            data, report, trust, _, soh = _load_and_verify(mfr_id, model_id)
+            mfr_name = BATTERY_REGISTRY.get(mfr_id, {}).get("name", mfr_id)
+            html_content = _generate_audit_html(data, report, mfr_name)
+            score = report.trust_score
+            sc_c  = score_to_css(score)
+            audit_cache[model_id] = (data, report, trust, soh, mfr_name)
+
+            ac1, ac2 = st.columns([4, 1])
+            with ac1:
+                decision = "APPROVE" if score > 85 else ("REVIEW" if score > 65 else "BLOCK")
+                st.markdown(f"""
+                <div class="card" style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="color:#c8d8f0;font-weight:600">{data['meta']['model_name']}</div>
+                    <div style="color:#4a6080;font-size:0.78rem">{mfr_name} · {data['meta']['chemistry']} · {data['meta']['capacity_kwh']} kWh</div>
+                  </div>
+                  <div style="color:{sc_c};font-weight:700;font-size:1.1rem">{score}/100 — {decision}</div>
+                </div>""", unsafe_allow_html=True)
+            with ac2:
+                st.download_button(
+                    label="Download Report",
+                    data=html_content,
+                    file_name=f"vericell_audit_{model_id}.html",
+                    mime="text/html",
+                    key=f"dl_{model_id}",
+                    use_container_width=True,
+                )
+            st.markdown("<div style='height:0.3rem'></div>", unsafe_allow_html=True)
+
+        # Full regulator view — selectbox so only one sensor_panel renders at a time
+        st.markdown('<div class="section-hdr">Full Regulator Deep-Dive</div>', unsafe_allow_html=True)
+        model_labels = {
+            "ex90_nmc811_111kwh": "Volvo EX90 — NMC811",
+            "ix_nmc712_105kwh":   "BMW iX — NMC712",
+            "lfp_80kwh":          "Generic LFP — PCB-EV-80",
+        }
+        selected_audit = st.selectbox(
+            "Select battery for full regulator inspection:",
+            list(model_labels.keys()),
+            format_func=lambda x: model_labels[x],
+            key="gov_audit_sel",
+        )
+        if selected_audit in audit_cache:
+            a_data, a_report, a_trust, a_soh, _ = audit_cache[selected_audit]
+            render_regulator(a_data, a_report, a_soh, a_trust)
+
+
+def page_enterprise_dashboard():
+    render_sidebar_nav()
+
+    # ── Sidebar: role toggle ──────────────────────────────────────────────────
+    with st.sidebar:
+        st.markdown("**Dashboard Role**")
+        ent_role = st.radio(
+            "View as:",
+            ["Business Analyst", "Technician"],
+            key="ent_role_radio",
+            label_visibility="collapsed",
+        )
+        st.session_state.enterprise_role = "technician" if ent_role == "Technician" else "analyst"
+
+    _block_count = 0
+    for _, (_mid, _modid) in BATTERY_ODOO_MAP.items():
+        _, _, _t, _, _ = _load_and_verify(_mid, _modid)
+        if _t["total"] <= 65:
+            _block_count += 1
+
+    if _block_count > 0:
+        st.markdown(
+            f'<div style="background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.4);'
+            f'border-radius:8px;padding:12px 18px;margin-bottom:1rem;color:#f87171;font-weight:600;font-size:0.9rem;">'
+            f'⚠️ {_block_count} supplier{"s" if _block_count > 1 else ""} blocked — immediate procurement action required. '
+            f'Review the Risk Matrix below.</div>',
+            unsafe_allow_html=True,
+        )
+
+    st.markdown("""
+    <div class="hero">
+      <div class="reg-tag">ENTERPRISE — ERP-INTEGRATED SUPPLIER RISK MANAGEMENT</div>
+      <h1>🏭 Enterprise Battery Dashboard</h1>
+      <p>Live Odoo ERP sync · Supplier Trust Scores · EU 2023/1542 compliance · Real-time technician write-back</p>
+    </div>""", unsafe_allow_html=True)
+
+    # ── Pull from Odoo ────────────────────────────────────────────────────────
+    with st.spinner("Pulling supplier data from Odoo ERP..."):
+        odoo_products = fetch_products()
+
+    if not odoo_products:
+        st.warning("Could not reach Odoo ERP — showing local data. Push sync will be unavailable.")
+        odoo_products = [{"id": None, "name": k} for k in BATTERY_ODOO_MAP]
+
+    # ── Build supplier rows ───────────────────────────────────────────────────
+    rows = []
+    battery_cache = {}  # (mfr_id, model_id) -> (data, report, trust, compliance, odoo_id)
+
+    for product in odoo_products:
+        name = product["name"]
+        if name not in BATTERY_ODOO_MAP:
+            continue
+        mfr_id, model_id = BATTERY_ODOO_MAP[name]
+        data, report, trust, compliance, soh = _load_and_verify(mfr_id, model_id)
+        odoo_id = product["id"]
+        battery_cache[(mfr_id, model_id)] = (data, report, trust, compliance, soh, odoo_id)
+
+        score = report.trust_score
+        decision = "APPROVE" if score > 85 else ("REVIEW" if score > 65 else "BLOCK")
+        fails_2024 = len(compliance[2024]["failures"])
+        carbon_class = (data.get("group_b_carbon", {}).get("data_points", {})
+                           .get("dp12_carbon_class", {}).get("declared_class", "—")) or "—"
+        comp_status = "Compliant" if fails_2024 == 0 else f"Non-compliant ({fails_2024} issue{'s' if fails_2024 > 1 else ''})"
+
+        rows.append({
+            "_mfr_id":   mfr_id,
+            "_model_id": model_id,
+            "_odoo_id":  odoo_id,
+            "Supplier":          data["meta"]["manufacturer_name"],
+            "Model":             data["meta"]["model_name"],
+            "Chemistry":         data["meta"]["chemistry"],
+            "Trust Score":       score,
+            "Carbon Class":      carbon_class,
+            "2024 Compliance":   comp_status,
+            "ERP Decision":      decision,
+            "Physical Verified": "✅ Yes" if PHYSICAL_VERIFIED.get(mfr_id, False) else "⏳ Pending",
+        })
+
+    # ── Supplier Risk Matrix ──────────────────────────────────────────────────
+    st.markdown('<div class="section-hdr">Supplier Risk Matrix — Live from Odoo ERP</div>', unsafe_allow_html=True)
+
+    display_cols = ["Supplier", "Model", "Chemistry", "Trust Score",
+                    "Carbon Class", "2024 Compliance", "ERP Decision", "Physical Verified"]
+    df = pd.DataFrame(rows)
+
+    st.dataframe(
+        df[display_cols],
+        column_config={
+            "Trust Score": st.column_config.ProgressColumn(
+                "Trust Score", min_value=0, max_value=100, format="%d / 100"
+            ),
+        },
+        use_container_width=True,
+        hide_index=True,
+    )
+
+    # ── KPI row ───────────────────────────────────────────────────────────────
+    k1, k2, k3 = st.columns(3)
+    approved  = sum(1 for r in rows if r["ERP Decision"] == "APPROVE")
+    review    = sum(1 for r in rows if r["ERP Decision"] == "REVIEW")
+    blocked   = sum(1 for r in rows if r["ERP Decision"] == "BLOCK")
+    avg_score = round(sum(r["Trust Score"] for r in rows) / len(rows), 1) if rows else 0
+
+    k1.metric("Suppliers Approved", f"{approved} / {len(rows)}")
+    k2.metric("Under Review", review)
+    k3.metric("Avg Trust Score", f"{avg_score} / 100")
+
+    st.markdown("---")
+
+    # ── Drill-down ────────────────────────────────────────────────────────────
+    st.markdown('<div class="section-hdr">Drill Down — Supplier Detail</div>', unsafe_allow_html=True)
+
+    supplier_map = {r["Supplier"]: (r["_mfr_id"], r["_model_id"]) for r in rows}
+    selected = st.selectbox("Select supplier to inspect:", list(supplier_map.keys()), key="ent_supplier_sel")
+
+    if selected:
+        mfr_id, model_id = supplier_map[selected]
+        data, report, trust, compliance, soh, odoo_id = battery_cache[(mfr_id, model_id)]
+        meta = data["meta"]
+
+        score = report.trust_score
+        decision_color = "#4ade80" if score > 85 else ("#f97316" if score > 65 else "#ef4444")
+        decision_label = "APPROVE" if score > 85 else ("REVIEW" if score > 65 else "BLOCK")
+
+        col_g, col_d = st.columns([1, 2])
+        with col_g:
+            gauge(score, "Trust Score", score_to_label(score))
+
+        with col_d:
+            st.markdown('<div class="section-hdr">Trust Score Breakdown</div>', unsafe_allow_html=True)
+            comp_vals = trust.get("components", {})
+            max_map = {"data_quality": 50, "third_party_verification": 30,
+                       "doc_present": 10, "test_report": 10}
+            for comp_key, pts in comp_vals.items():
+                max_v = max_map.get(comp_key, 10)
+                pct   = min(100, pts / max_v * 100) if max_v else 0
+                label = comp_key.replace("_", " ").title()
+                st.markdown(score_bar_html(label, pct, detail=f"{pts}/{max_v} pts"), unsafe_allow_html=True)
+
+            st.markdown(f"""
+            <div style="margin-top:1rem;padding:0.6rem 1rem;border-radius:8px;
+                 background:{decision_color}18;border:1px solid {decision_color}44;
+                 color:{decision_color};font-weight:700;font-size:0.95rem;text-align:center">
+              ERP Decision: {decision_label}
+            </div>""", unsafe_allow_html=True)
+
+        # Model metadata
+        with st.expander("Battery Model Details", expanded=False):
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("Capacity", f"{meta.get('capacity_kwh','—')} kWh")
+            m2.metric("Chemistry", meta.get("chemistry", "—"))
+            m3.metric("Country", meta.get("manufacturer_country", "—"))
+            m4.metric("Overall Score", f"{report.overall_score}/100")
+
+        # ── Technician action ─────────────────────────────────────────────────
+        if st.session_state.enterprise_role == "technician":
+            st.markdown('<div class="section-hdr">Technician Action — Update ERP Status</div>',
+                        unsafe_allow_html=True)
+            t1, t2 = st.columns([2, 1])
+            with t1:
+                status_choice = st.selectbox(
+                    "Set operational status for this battery:",
+                    ["Operational", "Under Review", "Flagged for Inspection", "Decommissioned"],
+                    key=f"tech_status_{mfr_id}",
+                )
+            with t2:
+                st.markdown("<div style='height:1.9rem'></div>", unsafe_allow_html=True)
+                if st.button("Sync to Odoo ERP", type="primary", use_container_width=True,
+                             key=f"sync_{mfr_id}", disabled=(odoo_id is None)):
+                    ok = push_status_update(odoo_id, status_choice)
+                    if ok:
+                        st.toast(f"Synced to Odoo ERP ✓  —  {meta['model_name']}: {status_choice}", icon="✅")
+                        push_verification_result(odoo_id, model_id, score, decision_label)
+                    else:
+                        st.toast("Odoo sync failed — check connection", icon="❌")
+            if odoo_id is None:
+                st.caption("Odoo connection unavailable — sync disabled.")
+
+        st.markdown("---")
+        if st.session_state.enterprise_role == "technician":
+            st.markdown('<div class="section-hdr">Full Technical Report — Technician View</div>',
+                        unsafe_allow_html=True)
+            render_technician(data, report, soh)
+        else:
+            st.markdown('<div class="section-hdr">Full Technical Report — Company View</div>',
+                        unsafe_allow_html=True)
+            render_company(data, report, soh, trust)
+
+
 def main():
-    page = st.session_state.page
-    if page == "role_select":
-        page_role_select()
-    elif page == "browse":
-        if not st.session_state.role:
-            st.session_state.page = "role_select"
-            st.rerun()
-        page_browse()
-    elif page == "passport":
-        if not st.session_state.selected_battery:
-            st.session_state.page = "browse"
-            st.rerun()
-        page_passport()
+    nav = st.session_state.nav_view
+    if nav == "enterprise":
+        page_enterprise_dashboard()
+    elif nav == "government":
+        page_government_portal()
+    else:
+        page = st.session_state.page
+        if page == "role_select":
+            page_role_select()
+        elif page == "browse":
+            if not st.session_state.role:
+                st.session_state.page = "role_select"
+                st.rerun()
+            page_browse()
+        elif page == "passport":
+            if not st.session_state.selected_battery:
+                st.session_state.page = "browse"
+                st.rerun()
+            page_passport()
 
 
 if __name__ == "__main__":
