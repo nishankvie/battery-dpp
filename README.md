@@ -2,7 +2,7 @@
 
 > **One-line pitch:** AI-powered trust validation for EV battery data — turning unverified Digital Product Passports into actionable procurement, compliance, and reuse decisions, synced live to ERP systems.
 ---
-BRIEF
+# BRIEF
 The EU Battery Regulation mandates a Digital Product 
 Passport for every battery by 2027.
 
