@@ -1,6 +1,41 @@
 # TrustLayer VeriCell — Battery Digital Product Passport Platform
 
 > **One-line pitch:** AI-powered trust validation for EV battery data — turning unverified Digital Product Passports into actionable procurement, compliance, and reuse decisions, synced live to ERP systems.
+---
+BRIEF
+The EU Battery Regulation mandates a Digital Product 
+Passport for every battery by 2027.
+
+Every company is rushing to collect and log that data.
+
+Nobody is checking if it's true.
+
+A manufacturer can declare "Class A" carbon footprint 
+while their actual numbers put them in Class C. The 
+DPP logs it. Nobody catches it.
+
+This matters because the second-life EV battery market 
+— batteries repurposed after their first automotive 
+life — is worth billions. But right now it barely 
+functions. Why? Because buyers can't trust the data. 
+A battery declared at 80% health might be at 60%. 
+There's no verification layer.
+
+We built one.
+
+VeriCell runs 8 mathematical cross-checks on every 
+battery's declared data — catching internal 
+contradictions that only show up when you do the 
+math. Energy consistency, carbon class matching, 
+cobalt weight plausibility. Things a fraudulent 
+or lazy submission can't survive.
+
+Then we push the decision — APPROVE, REVIEW, or 
+BLOCK — directly into the buyer's ERP system.
+
+Not a report. A decision. In real time.
+
+Built in 72 hours at a hackathon.
 
 ---
 
